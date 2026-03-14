@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Java Core — vbforge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0c10;
+  --surface: #111318;
+  --surface2: #181c24;
+  --border: #1f2430;
+  --border2: #2a3040;
+  --text: #e8eaf0;
+  --text-muted: #7a8099;
+  --text-dim: #4a5068;
+  --accent: #f5a623;
+  --accent2: #e8843a;
+  --java: #5b8dee;
+  --java2: #3a6fd4;
+  --green: #4caf7d;
+  --red: #e05a5a;
+  --purple: #9b7fe8;
+  --mono: 'Space Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --display: 'Syne', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 60px;
+  background: rgba(10,12,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--text-muted); }
+
+.nav-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text);
+  border-color: var(--border2);
+  background: var(--surface);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.3;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,141,238,0.12) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%);
+  bottom: 0;
+  left: 100px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  background: rgba(245,166,35,0.1);
+  border: 1px solid rgba(245,166,35,0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero h1 .line1 { display: block; color: var(--text); }
+.hero h1 .line2 {
+  display: block;
+  background: linear-gradient(135deg, var(--java) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 44px;
+  animation: fadeUp 0.6s 0.2s ease both;
+  font-weight: 300;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 44px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-num {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+.stat-num span { color: var(--accent); }
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0a0c10;
+}
+.btn-primary:hover {
+  background: var(--accent2);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(245,166,35,0.25);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border2);
+}
+.btn-secondary:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+  background: var(--surface);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 80px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  margin-bottom: 48px;
+}
+
+.section-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+/* ── ROADMAP ── */
+#roadmap { background: var(--bg); }
+
+.phases-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  position: relative;
+}
+
+.phase:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 100%;
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--border2), transparent);
+}
+
+.phase-sidebar {
+  padding: 24px 24px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.phase-sidebar::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.phase-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+.phase-name {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.phase-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.phase-modules {
+  padding: 20px 0 20px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: flex-start;
+}
+
+.module-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  position: relative;
+}
+
+.module-chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--surface2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.module-chip.done {
+  border-color: rgba(76,175,125,0.4);
+  background: rgba(76,175,125,0.06);
+  color: var(--green);
+}
+
+.module-chip.done::after {
+  content: '✓';
+  font-size: 10px;
+  color: var(--green);
+}
+
+.chip-java {
+  font-size: 9px;
+  color: var(--java);
+  background: rgba(91,141,238,0.1);
+  border: 1px solid rgba(91,141,238,0.2);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--mono);
+}
+
+/* phase accent colors */
+.phase[data-phase="1"] .phase-name { color: #4caf7d; }
+.phase[data-phase="2"] .phase-name { color: #5b8dee; }
+.phase[data-phase="3"] .phase-name { color: #f5a623; }
+.phase[data-phase="4"] .phase-name { color: #9b7fe8; }
+.phase[data-phase="5"] .phase-name { color: #e05a5a; }
+.phase[data-phase="6"] .phase-name { color: #4ecdc4; }
+.phase[data-phase="7"] .phase-name { color: #f5a623; }
+.phase[data-phase="8"] .phase-name { color: #5b8dee; }
+.phase[data-phase="9"] .phase-name { color: #9b7fe8; }
+
+/* ── PROGRESS SECTION ── */
+#progress { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.progress-overview {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.progress-ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ring-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.ring-svg { transform: rotate(-90deg); }
+
+.ring-bg { fill: none; stroke: var(--border2); stroke-width: 10; }
+.ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ring-pct {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.ring-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.progress-phases {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.progress-phase-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-phase-name {
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--text-muted);
+}
+
+.progress-phase-frac {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--text-dim);
+}
+
+.progress-bar-track {
+  height: 4px;
+  background: var(--border2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.btn-reset:hover { color: var(--red); border-color: var(--red); }
+
+/* ── MODULE INDEX ── */
+#modules { background: var(--bg); }
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input::placeholder { color: var(--text-dim); }
+.search-input:focus { border-color: var(--accent); }
+
+.filter-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-tag {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.filter-tag:hover { border-color: var(--border2); color: var(--text); }
+.filter-tag.active { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 700; }
+
+.modules-table-wrap { overflow-x: auto; }
+
+.modules-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.modules-table th {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.modules-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.modules-table tr { transition: background 0.15s; }
+.modules-table tr:hover td { background: var(--surface); }
+.modules-table tr.hidden { display: none; }
+
+.td-module {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--java);
+}
+
+.td-desc { color: var(--text-muted); font-size: 13px; max-width: 340px; }
+
+.tag-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  margin: 2px;
+  text-transform: uppercase;
+}
+
+.tag-BASICS { background: rgba(76,175,125,0.12); color: #4caf7d; border: 1px solid rgba(76,175,125,0.2); }
+.tag-OOP { background: rgba(91,141,238,0.12); color: #5b8dee; border: 1px solid rgba(91,141,238,0.2); }
+.tag-COLLECTIONS { background: rgba(245,166,35,0.12); color: #f5a623; border: 1px solid rgba(245,166,35,0.2); }
+.tag-FUNCTIONAL { background: rgba(155,127,232,0.12); color: #9b7fe8; border: 1px solid rgba(155,127,232,0.2); }
+.tag-STREAMS { background: rgba(155,127,232,0.12); color: #9b7fe8; border: 1px solid rgba(155,127,232,0.2); }
+.tag-EXCEPTIONS { background: rgba(224,90,90,0.12); color: #e05a5a; border: 1px solid rgba(224,90,90,0.2); }
+.tag-GENERICS { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
+.tag-CONCURRENCY { background: rgba(224,90,90,0.12); color: #e05a5a; border: 1px solid rgba(224,90,90,0.2); }
+.tag-ADVANCED { background: rgba(245,166,35,0.08); color: var(--text-dim); border: 1px solid var(--border); }
+.tag-JVM { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
+.tag-PERFORMANCE { background: rgba(78,205,196,0.08); color: var(--text-dim); border: 1px solid var(--border); }
+.tag-MODERN-JAVA { background: rgba(245,166,35,0.12); color: #f5a623; border: 1px solid rgba(245,166,35,0.2); }
+.tag-STRINGS { background: rgba(76,175,125,0.12); color: #4caf7d; border: 1px solid rgba(76,175,125,0.2); }
+.tag-CONTROL-FLOW { background: rgba(76,175,125,0.12); color: #4caf7d; border: 1px solid rgba(76,175,125,0.2); }
+.tag-DESIGN-PATTERNS { background: rgba(155,127,232,0.12); color: #9b7fe8; border: 1px solid rgba(155,127,232,0.2); }
+.tag-BEST-PRACTICES { background: rgba(91,141,238,0.12); color: #5b8dee; border: 1px solid rgba(91,141,238,0.2); }
+.tag-DATE-TIME { background: rgba(245,166,35,0.12); color: #f5a623; border: 1px solid rgba(245,166,35,0.2); }
+.tag-ANNOTATIONS { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
+.tag-REFLECTION { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
+.tag-LOGGING { background: rgba(91,141,238,0.12); color: #5b8dee; border: 1px solid rgba(91,141,238,0.2); }
+.tag-NETWORKING { background: rgba(91,141,238,0.12); color: #5b8dee; border: 1px solid rgba(91,141,238,0.2); }
+.tag-SERIALIZATION { background: rgba(245,166,35,0.12); color: #f5a623; border: 1px solid rgba(245,166,35,0.2); }
+.tag-NIO { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
+
+.java-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  background: rgba(91,141,238,0.1);
+  color: var(--java);
+  border: 1px solid rgba(91,141,238,0.2);
+  white-space: nowrap;
+}
+
+.done-checkbox {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--border2);
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+}
+.done-checkbox:checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+.done-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  font-size: 11px;
+  color: #0a0c10;
+  font-weight: 700;
+}
+.done-checkbox:hover:not(:checked) { border-color: var(--text-dim); }
+
+/* ── INTERVIEW SECTION ── */
+#interview { background: var(--surface); border-top: 1px solid var(--border); }
+
+.interview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.interview-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.interview-card:hover { border-color: var(--border2); }
+
+.interview-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.interview-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.interview-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.interview-name {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.interview-arrow {
+  font-size: 12px;
+  color: var(--text-dim);
+  transition: transform 0.2s;
+}
+
+.interview-card.open .interview-arrow { transform: rotate(180deg); }
+
+.interview-body {
+  display: none;
+  padding: 0 20px 20px;
+}
+
+.interview-card.open .interview-body { display: block; }
+
+.interview-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+.interview-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.interview-item::before {
+  content: '→';
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 11px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-logo {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.footer-logo strong { color: var(--accent); }
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+/* ── DIVIDER ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 13px;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>vbforge/</span>java-core</a>
+  <ul class="nav-links">
+    <li><a href="#roadmap" class="active">Roadmap</a></li>
+    <li><a href="#progress">Progress</a></li>
+    <li><a href="#modules">Modules</a></li>
+    <li><a href="#interview">Interview</a></li>
+    <li><a href="https://github.com/vbforge/java-core" target="_blank">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open Source Learning</div>
+    <h1>
+      <span class="line1">Master</span>
+      <span class="line2">Java Core</span>
+    </h1>
+    <p class="hero-desc">
+      31 structured modules with practical code examples and tests.
+      From primitive types to virtual threads — everything in one place.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">31<span>+</span></div>
+        <div class="stat-label">Modules</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">9</div>
+        <div class="stat-label">Phases</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Java<span> 8→21</span></div>
+        <div class="stat-label">Coverage</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#roadmap" class="btn btn-primary">View Roadmap →</a>
+      <a href="https://github.com/vbforge/java-core" target="_blank" class="btn btn-secondary">★ Star on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-header">
+    <div class="section-tag">// 01 — Learning Path</div>
+    <h2 class="section-title">Roadmap</h2>
+    <p class="section-subtitle">Click any module to mark it complete. Recommended order for progressive learning.</p>
+  </div>
+
+  <div class="phases-container" id="phasesContainer"></div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROGRESS -->
+<section id="progress">
+  <div class="section-header">
+    <div class="section-tag">// 02 — Track Your Journey</div>
+    <h2 class="section-title">Progress</h2>
+    <p class="section-subtitle">Your progress is saved locally in the browser.</p>
+  </div>
+  <div class="progress-overview">
+    <div class="progress-ring-wrap">
+      <div class="ring-container">
+        <svg class="ring-svg" width="180" height="180" viewBox="0 0 180 180">
+          <defs>
+            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#5b8dee"/>
+              <stop offset="100%" stop-color="#f5a623"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg" cx="90" cy="90" r="76"/>
+          <circle class="ring-fill" id="ringFill" cx="90" cy="90" r="76"
+            stroke-dasharray="477.5"
+            stroke-dashoffset="477.5"/>
+        </svg>
+        <div class="ring-text">
+          <div class="ring-pct" id="ringPct">0%</div>
+          <div class="ring-label">Complete</div>
+        </div>
+      </div>
+      <button class="btn-reset" onclick="resetProgress()">↺ Reset all</button>
+    </div>
+    <div class="progress-phases" id="progressPhases"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- MODULES INDEX -->
+<section id="modules">
+  <div class="section-header">
+    <div class="section-tag">// 03 — Module Index</div>
+    <h2 class="section-title">All Modules</h2>
+    <p class="section-subtitle">Search and filter all 31 modules.</p>
+  </div>
+
+  <div class="filter-bar">
+    <input type="text" class="search-input" placeholder="Search modules..." id="searchInput" oninput="filterModules()"/>
+    <div class="filter-tags" id="filterTags"></div>
+  </div>
+
+  <div class="modules-table-wrap">
+    <table class="modules-table" id="modulesTable">
+      <thead>
+        <tr>
+          <th>✓</th>
+          <th>Module</th>
+          <th>Description</th>
+          <th>Tags</th>
+          <th>Java</th>
+        </tr>
+      </thead>
+      <tbody id="modulesBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState">No modules match your search.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- INTERVIEW PREP -->
+<section id="interview">
+  <div class="section-header">
+    <div class="section-tag">// 04 — Interview Prep</div>
+    <h2 class="section-title">Quick Reference</h2>
+    <p class="section-subtitle">Common interview topics, organized by category. Click to expand.</p>
+  </div>
+  <div class="interview-grid" id="interviewGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <strong>vbforge</strong>/java-core — com.vbforge
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/vbforge/java-core" target="_blank">GitHub</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#modules">Modules</a>
+  </div>
+</footer>
+
+<script>
+// ── DATA ──
+const PHASES = [
+  {
+    num: 1, name: "Basics", color: "#4caf7d",
+    modules: [
+      { id: "basics-variables-and-types", label: "Variables & Types", java: "8–17+" },
+      { id: "basics-operators-and-expressions", label: "Operators", java: "8" },
+      { id: "control-flow-statements", label: "Control Flow", java: "8–17+" },
+      { id: "strings-and-text-processing", label: "Strings & Text", java: "8–15+" },
+      { id: "arrays-and-collections-basics", label: "Arrays & Collections Basics", java: "8" },
+    ]
+  },
+  {
+    num: 2, name: "Core OOP", color: "#5b8dee",
+    modules: [
+      { id: "oop-inheritance-and-polymorphism", label: "Inheritance & Polymorphism", java: "8" },
+      { id: "oop-interfaces-and-abstraction", label: "Interfaces & Abstraction", java: "8–9" },
+      { id: "oop-encapsulation-patterns", label: "Encapsulation Patterns", java: "8–16+" },
+      { id: "enums-and-nested-classes", label: "Enums & Nested Classes", java: "8" },
+      { id: "sealed-classes-pattern-matching", label: "Sealed Classes & Pattern Matching", java: "17–21+" },
+    ]
+  },
+  {
+    num: 3, name: "Functional & Streams", color: "#f5a623",
+    modules: [
+      { id: "functional-interfaces", label: "Functional Interfaces", java: "8" },
+      { id: "streams-api-basics", label: "Streams Basics", java: "8" },
+      { id: "streams-api-advanced", label: "Streams Advanced", java: "8" },
+      { id: "optional-and-null-handling", label: "Optional & Null Handling", java: "8" },
+    ]
+  },
+  {
+    num: 4, name: "Exceptions, Generics & Collections", color: "#9b7fe8",
+    modules: [
+      { id: "exception-handling", label: "Exception Handling", java: "8" },
+      { id: "generics-fundamentals", label: "Generics Fundamentals", java: "8" },
+      { id: "collections-framework-advanced", label: "Collections Advanced", java: "8" },
+    ]
+  },
+  {
+    num: 5, name: "I/O, Date & Logging", color: "#e05a5a",
+    modules: [
+      { id: "date-time-api", label: "Date-Time API", java: "8" },
+      { id: "file-io-basics", label: "File I/O Basics", java: "8" },
+      { id: "file-io-nio", label: "File I/O NIO", java: "8" },
+      { id: "serialization", label: "Serialization", java: "8" },
+      { id: "logging-basics", label: "Logging Basics", java: "8+" },
+    ]
+  },
+  {
+    num: 6, name: "Concurrency", color: "#4ecdc4",
+    modules: [
+      { id: "multithreading-basics", label: "Multithreading Basics", java: "8" },
+      { id: "multithreading-advanced", label: "Multithreading Advanced", java: "8" },
+      { id: "concurrent-collections", label: "Concurrent Collections", java: "8" },
+      { id: "virtual-threads-intro", label: "Virtual Threads (Loom)", java: "21+" },
+    ]
+  },
+  {
+    num: 7, name: "JVM Internals", color: "#f5a623",
+    modules: [
+      { id: "jvm-basics-memory-and-gc", label: "JVM Memory & GC", java: "8+" },
+    ]
+  },
+  {
+    num: 8, name: "Modern Java", color: "#5b8dee",
+    modules: [
+      { id: "http-client-api", label: "HTTP Client API", java: "11+" },
+      { id: "java-modules-jpms", label: "Java Modules (JPMS)", java: "9+" },
+    ]
+  },
+  {
+    num: 9, name: "Advanced Topics", color: "#9b7fe8",
+    modules: [
+      { id: "annotations", label: "Annotations", java: "8" },
+      { id: "reflection-api", label: "Reflection API", java: "8" },
+      { id: "design-patterns", label: "Design Patterns", java: "8" },
+      { id: "best-practices-and-solid", label: "SOLID & Best Practices", java: "8+" },
+    ]
+  },
+];
+
+const MODULES_DATA = [
+  { id: "basics-variables-and-types", desc: "Primitive types, type casting, literals, constants, variable scope, var type inference", tags: ["BASICS"], java: "8–17+" },
+  { id: "basics-operators-and-expressions", desc: "Arithmetic, logical, bitwise, ternary operators, operator precedence", tags: ["BASICS"], java: "8" },
+  { id: "control-flow-statements", desc: "if-else, switch (classic + expressions & pattern matching), loops, break/continue", tags: ["CONTROL-FLOW"], java: "8–17+" },
+  { id: "strings-and-text-processing", desc: "String manipulation, StringBuilder, text blocks, String pool, regex, formatting", tags: ["STRINGS"], java: "8–15+" },
+  { id: "arrays-and-collections-basics", desc: "Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns", tags: ["COLLECTIONS"], java: "8" },
+  { id: "oop-inheritance-and-polymorphism", desc: "Inheritance, overriding, super, polymorphism, abstract classes", tags: ["OOP"], java: "8" },
+  { id: "oop-interfaces-and-abstraction", desc: "Interfaces, default/static methods, multiple inheritance via interfaces", tags: ["OOP"], java: "8–9" },
+  { id: "oop-encapsulation-patterns", desc: "Access modifiers, immutability, records (Java 16+), data hiding", tags: ["OOP"], java: "8–16+" },
+  { id: "enums-and-nested-classes", desc: "Enums with fields/methods, inner/static nested/anonymous classes", tags: ["OOP", "ADVANCED"], java: "8" },
+  { id: "sealed-classes-pattern-matching", desc: "Sealed classes/interfaces, permits, basic pattern matching (switch + instanceof)", tags: ["OOP", "MODERN-JAVA", "ADVANCED"], java: "17–21+" },
+  { id: "exception-handling", desc: "try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources", tags: ["EXCEPTIONS"], java: "8" },
+  { id: "generics-fundamentals", desc: "Generic classes/methods, bounded types, wildcards (?, extends, super)", tags: ["GENERICS"], java: "8" },
+  { id: "collections-framework-advanced", desc: "Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators, Collections util", tags: ["COLLECTIONS", "ADVANCED"], java: "8" },
+  { id: "functional-interfaces", desc: "@FunctionalInterface, lambdas, method references, Predicate/Function/Consumer/Supplier", tags: ["FUNCTIONAL"], java: "8" },
+  { id: "streams-api-basics", desc: "Stream creation, filter/map/sorted/collect/forEach/reduce", tags: ["STREAMS", "FUNCTIONAL"], java: "8" },
+  { id: "streams-api-advanced", desc: "flatMap, groupingBy, partitioningBy, parallel streams, custom collectors", tags: ["STREAMS", "ADVANCED"], java: "8" },
+  { id: "optional-and-null-handling", desc: "Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains", tags: ["FUNCTIONAL"], java: "8" },
+  { id: "date-time-api", desc: "LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing", tags: ["DATE-TIME"], java: "8" },
+  { id: "file-io-basics", desc: "File/BufferedReader/Writer, try-with-resources, Path/Files API", tags: ["I/O"], java: "8" },
+  { id: "file-io-nio", desc: "NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes", tags: ["I/O", "NIO"], java: "8" },
+  { id: "serialization", desc: "Serializable, Object streams, transient, serialVersionUID, externalizable", tags: ["I/O", "SERIALIZATION"], java: "8" },
+  { id: "logging-basics", desc: "SLF4J + Logback, configuration, best practices, structured logging", tags: ["BEST-PRACTICES", "LOGGING"], java: "8+" },
+  { id: "http-client-api", desc: "Modern java.net.http.HttpClient (sync/async), request/response handling", tags: ["NETWORKING", "MODERN-JAVA"], java: "11+" },
+  { id: "annotations", desc: "Built-in, custom annotations, retention & target policies", tags: ["ANNOTATIONS", "ADVANCED"], java: "8" },
+  { id: "reflection-api", desc: "Class introspection, dynamic field/method access, annotation processing", tags: ["REFLECTION", "ADVANCED"], java: "8" },
+  { id: "jvm-basics-memory-and-gc", desc: "Stack vs Heap, object lifecycle, GC basics, reference types (strong/soft/weak/phantom)", tags: ["JVM", "PERFORMANCE"], java: "8+" },
+  { id: "multithreading-basics", desc: "Thread/Runnable, lifecycle, synchronization, volatile, thread-safety basics", tags: ["CONCURRENCY"], java: "8" },
+  { id: "multithreading-advanced", desc: "ExecutorService, ThreadPool, Callable/Future, CountDownLatch, CyclicBarrier, Semaphore", tags: ["CONCURRENCY", "ADVANCED"], java: "8" },
+  { id: "concurrent-collections", desc: "ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes", tags: ["CONCURRENCY", "COLLECTIONS"], java: "8" },
+  { id: "virtual-threads-intro", desc: "Virtual threads / Project Loom basics (Java 21+), structured concurrency intro", tags: ["CONCURRENCY", "MODERN-JAVA"], java: "21+" },
+  { id: "design-patterns", desc: "Singleton, Factory, Builder, Observer, Strategy, Decorator + simple examples", tags: ["DESIGN-PATTERNS", "ADVANCED"], java: "8" },
+  { id: "best-practices-and-solid", desc: "SOLID principles, clean code, common code smells, refactoring techniques", tags: ["BEST-PRACTICES", "ADVANCED"], java: "8+" },
+  { id: "java-modules-jpms", desc: "Java Platform Module System basics — module-info.java, requires/exports", tags: ["MODERN-JAVA", "ADVANCED"], java: "9+" },
+];
+
+const INTERVIEW_DATA = [
+  {
+    name: "Basics & OOP", icon: "☕", color: "#5b8dee",
+    items: [
+      "== vs equals() vs hashCode() — contract and common pitfalls",
+      "Variable scope: local, instance, class (static)",
+      "String immutability & String pool — why and how",
+      "Records vs traditional classes — when to use each",
+      "Abstract class vs Interface — key differences post Java 8",
+      "Method overloading vs overriding — resolution rules",
+    ]
+  },
+  {
+    name: "Collections & Streams", icon: "⚡", color: "#f5a623",
+    items: [
+      "HashMap internal structure — hashing, buckets, load factor",
+      "ArrayList vs LinkedList — time complexity tradeoffs",
+      "Stream laziness — intermediate vs terminal operations",
+      "parallel stream pitfalls — when NOT to use them",
+      "Comparable vs Comparator — natural vs custom ordering",
+      "fail-fast vs fail-safe iterators",
+    ]
+  },
+  {
+    name: "Concurrency", icon: "🔄", color: "#e05a5a",
+    items: [
+      "synchronized vs ReentrantLock — differences and use cases",
+      "volatile keyword — visibility guarantee, not atomicity",
+      "happens-before relationship in Java Memory Model",
+      "Deadlock — how to prevent (lock ordering, tryLock)",
+      "Virtual threads vs platform threads — Project Loom",
+      "ThreadLocal — usage and memory leak risks",
+    ]
+  },
+  {
+    name: "JVM & Performance", icon: "⚙️", color: "#4ecdc4",
+    items: [
+      "Stack vs Heap — what lives where",
+      "GC algorithms: Serial, Parallel, G1, ZGC — trade-offs",
+      "Memory leak signs in Java — common causes",
+      "Strong / Soft / Weak / Phantom references",
+      "JIT compilation — what it is, how it helps",
+      "OutOfMemoryError types and what causes each",
+    ]
+  },
+  {
+    name: "Modern Java", icon: "🚀", color: "#9b7fe8",
+    items: [
+      "Sealed classes — exhaustiveness in pattern matching",
+      "Pattern matching instanceof — removing cast boilerplate",
+      "Text blocks — indentation handling rules",
+      "var — type inference scope and limitations",
+      "Virtual threads — use case: high-concurrency I/O bound tasks",
+      "Record patterns in switch expressions",
+    ]
+  },
+  {
+    name: "Design & Best Practices", icon: "🏗️", color: "#4caf7d",
+    items: [
+      "SOLID — one practical example per principle",
+      "Builder pattern — when and why over constructors",
+      "Immutability — how to enforce, benefits",
+      "Checked vs unchecked exceptions — design decision",
+      "Optional — what it's for, what it's NOT for",
+      "Clean code naming — methods, classes, variables",
+    ]
+  },
+];
+
+// ── STATE ──
+const STORAGE_KEY = 'javacore_progress_v1';
+let done = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+let activeTag = null;
+
+function saveProgress() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
+}
+
+function toggleDone(id) {
+  if (done.has(id)) done.delete(id);
+  else done.add(id);
+  saveProgress();
+  renderAll();
+}
+
+function resetProgress() {
+  if (!confirm('Reset all progress?')) return;
+  done.clear();
+  saveProgress();
+  renderAll();
+}
+
+// ── RENDER ROADMAP ──
+function renderRoadmap() {
+  const c = document.getElementById('phasesContainer');
+  c.innerHTML = PHASES.map(p => `
+    <div class="phase" data-phase="${p.num}">
+      <div class="phase-sidebar">
+        <div class="phase-num">Phase ${String(p.num).padStart(2,'0')}</div>
+        <div class="phase-name">${p.name}</div>
+        <div class="phase-count">${p.modules.filter(m => done.has(m.id)).length}/${p.modules.length} done</div>
+      </div>
+      <div class="phase-modules">
+        ${p.modules.map(m => `
+          <span class="module-chip ${done.has(m.id) ? 'done' : ''}" onclick="toggleDone('${m.id}')">
+            ${m.label}
+            <span class="chip-java">${m.java}</span>
+          </span>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER PROGRESS ──
+function renderProgress() {
+  const total = MODULES_DATA.length;
+  const completed = done.size;
+  const pct = Math.round((completed / total) * 100);
+
+  document.getElementById('ringPct').textContent = pct + '%';
+  const circumference = 477.5;
+  const offset = circumference - (pct / 100) * circumference;
+  document.getElementById('ringFill').style.strokeDashoffset = offset;
+
+  const phasesEl = document.getElementById('progressPhases');
+  phasesEl.innerHTML = PHASES.map(p => {
+    const pDone = p.modules.filter(m => done.has(m.id)).length;
+    const pTotal = p.modules.length;
+    const pPct = Math.round((pDone / pTotal) * 100);
+    return `
+      <div class="progress-phase-row">
+        <div class="progress-phase-header">
+          <span class="progress-phase-name">Phase ${p.num}: ${p.name}</span>
+          <span class="progress-phase-frac">${pDone}/${pTotal}</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width:${pPct}%; background: linear-gradient(90deg, ${p.color}aa, ${p.color})"></div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── RENDER MODULES TABLE ──
+const ALL_TAGS = [...new Set(MODULES_DATA.flatMap(m => m.tags))].sort();
+
+function renderFilterTags() {
+  const el = document.getElementById('filterTags');
+  el.innerHTML = ALL_TAGS.map(t => `
+    <button class="filter-tag ${activeTag === t ? 'active' : ''}" onclick="setTag('${t}')">${t}</button>
+  `).join('');
+}
+
+function setTag(t) {
+  activeTag = activeTag === t ? null : t;
+  filterModules();
+}
+
+function filterModules() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  renderFilterTags();
+  let visible = 0;
+  document.querySelectorAll('#modulesBody tr').forEach(row => {
+    const id = row.dataset.id;
+    const mod = MODULES_DATA.find(m => m.id === id);
+    const matchSearch = !q || mod.id.includes(q) || mod.desc.toLowerCase().includes(q) || mod.tags.some(t => t.toLowerCase().includes(q));
+    const matchTag = !activeTag || mod.tags.includes(activeTag);
+    const show = matchSearch && matchTag;
+    row.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function renderModulesTable() {
+  const tbody = document.getElementById('modulesBody');
+  tbody.innerHTML = MODULES_DATA.map(m => `
+    <tr data-id="${m.id}">
+      <td>
+        <input type="checkbox" class="done-checkbox" ${done.has(m.id) ? 'checked' : ''}
+          onchange="toggleDone('${m.id}')"/>
+      </td>
+      <td class="td-module">${m.id}</td>
+      <td class="td-desc">${m.desc}</td>
+      <td>${m.tags.map(t => `<span class="tag-pill tag-${t}">${t}</span>`).join('')}</td>
+      <td><span class="java-badge">${m.java}</span></td>
+    </tr>
+  `).join('');
+  renderFilterTags();
+}
+
+// ── RENDER INTERVIEW ──
+function renderInterview() {
+  const el = document.getElementById('interviewGrid');
+  el.innerHTML = INTERVIEW_DATA.map((cat, i) => `
+    <div class="interview-card" id="icard-${i}">
+      <div class="interview-card-header" onclick="toggleCard(${i})">
+        <div class="interview-card-title">
+          <div class="interview-icon" style="background:${cat.color}1a; border:1px solid ${cat.color}33">
+            ${cat.icon}
+          </div>
+          <div class="interview-name">${cat.name}</div>
+        </div>
+        <div class="interview-arrow">▼</div>
+      </div>
+      <div class="interview-body">
+        <ul class="interview-items">
+          ${cat.items.map(item => `<li class="interview-item">${item}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(i) {
+  document.getElementById('icard-' + i).classList.toggle('open');
+}
+
+// ── RENDER ALL ──
+function renderAll() {
+  renderRoadmap();
+  renderProgress();
+  renderModulesTable();
+}
+
+// ── NAV ACTIVE STATE ──
+window.addEventListener('scroll', () => {
+  const sections = ['roadmap', 'progress', 'modules', 'interview'];
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 80) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ── INIT ──
+renderAll();
+renderInterview();
+</script>
+</body>
+</html>
