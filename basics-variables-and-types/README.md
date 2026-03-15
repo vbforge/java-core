@@ -20,10 +20,31 @@
 ```
 src/
 ├── main/java/com/vbforge/basics/variables/
-│   └── VariablesDemo.java      ← theory + annotated examples
+│   ├── VariablesDemo.java        ← theory + annotated examples
+│   └── VariablesTasks.java       ← 🎯 your tasks — implement these methods
 └── test/java/com/vbforge/basics/variables/
-    └── VariablesDemoTest.java  ← JUnit 5 + AssertJ tests
+    ├── VariablesDemoTest.java     ← tests for the demo
+    └── VariablesTasksTest.java    ← 🧪 tests for your tasks — all must pass
 ```
+
+## 🎯 Tasks
+
+Open `VariablesTasks.java` and implement all 5 methods. Each method has a detailed
+Javadoc explaining exactly what it should do.
+
+| # | Method | Topic |
+|---|---|---|
+| 1 | `primitiveSize(typeName)` | Know the byte size of each primitive type |
+| 2 | `safeNarrow(double)` | Narrowing cast with boundary clamping |
+| 3 | `isInIntegerCacheRange(Integer)` | Integer cache range -128..127 |
+| 4 | `parseOrDefault(String, int)` | Null-safe string to int parsing |
+| 5 | `shiftChar(char, int)` | Char casting + arithmetic + wrap-around |
+
+Run your solutions with:
+```bash
+mvn test -Dtest=VariablesTasksTest
+```
+All 5 task groups must go **GREEN** ✅
 
 ## Key things to remember
 
@@ -45,11 +66,14 @@ var list = new ArrayList<String>();  // inferred as ArrayList<String>
 ## Run
 
 ```bash
-# From module directory
+# All tests (demo + tasks)
 mvn test
 
-# Single test class
+# Demo tests only
 mvn test -Dtest=VariablesDemoTest
+
+# Task tests only
+mvn test -Dtest=VariablesTasksTest
 
 # Run main demo
 mvn exec:java -Dexec.mainClass="com.vbforge.basics.variables.VariablesDemo"

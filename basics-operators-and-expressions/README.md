@@ -20,10 +20,32 @@
 ```
 src/
 ├── main/java/com/vbforge/basics/operators/
-│   └── OperatorsDemo.java      ← theory + annotated examples
+│   ├── OperatorsDemo.java        ← theory + annotated examples
+│   └── OperatorsTasks.java       ← 🎯 your tasks — implement these methods
 └── test/java/com/vbforge/basics/operators/
-    └── OperatorsDemoTest.java  ← JUnit 5 + AssertJ tests
+    ├── OperatorsDemoTest.java     ← tests for the demo
+    └── OperatorsTasksTest.java    ← 🧪 tests for your tasks — all must pass
 ```
+
+## 🎯 Tasks
+
+Open `OperatorsTasks.java` and implement all 6 methods. Each method has a detailed
+Javadoc explaining exactly what it should do.
+
+| # | Method | Topic |
+|---|---|---|
+| 1 | `isDivisibleByBoth(n, a, b)` | Remainder operator `%` |
+| 2 | `intAverage(a, b, c)` | Integer arithmetic without floating-point |
+| 3 | `absoluteValue(n)` | Ternary operator — no `if` or `Math.abs` allowed |
+| 4 | `isPowerOfTwo(n)` | Bitwise trick: `n & (n-1)` |
+| 5 | `swapWithoutTemp(a, b)` | Arithmetic or XOR swap — no temp variable |
+| 6 | `powerOfTwoShift(exp)` | Left-shift operator `<<` only |
+
+Run your solutions with:
+```bash
+mvn test -Dtest=OperatorsTasksTest
+```
+All 6 task groups must go **GREEN** ✅
 
 ## Key things to remember
 
@@ -41,10 +63,10 @@ false && (++counter > 0)  // counter never incremented
 true  || (++counter > 0)  // counter never incremented
 
 // Precedence surprises
-2 + 3 * 4           // → 14  (not 20)
+2 + 3 * 4               // → 14  (not 20)
 true || false && false  // → true  (false && false evaluated first)
 
-// Bitwise trick: odd/even check (faster than % 2)
+// Bitwise trick: odd/even check
 n & 1 == 1  // odd
 n & 1 == 0  // even
 ```
@@ -52,11 +74,14 @@ n & 1 == 0  // even
 ## Run
 
 ```bash
-# From module directory
+# All tests (demo + tasks)
 mvn test
 
-# Single test class
+# Demo tests only
 mvn test -Dtest=OperatorsDemoTest
+
+# Task tests only
+mvn test -Dtest=OperatorsTasksTest
 
 # Run main demo
 mvn exec:java -Dexec.mainClass="com.vbforge.basics.operators.OperatorsDemo"

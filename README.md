@@ -1,6 +1,6 @@
 # Java Core
 
-🎯 **Comprehensive Java Core learning modules with practical examples and tests**
+🎯 **Comprehensive Java Core learning modules with practical examples, tests, and hands-on tasks**
 
 [![Java](https://img.shields.io/badge/Java-17%2B-orange?style=flat-square&logo=openjdk)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.6%2B-blue?style=flat-square&logo=apachemaven)](https://maven.apache.org/)
@@ -26,47 +26,70 @@
 Each module contains:
 - Annotated source code explaining *why*, not just *what*
 - JUnit 5 + AssertJ tests that verify every concept
+- **🎯 Tasks** — method stubs for you to implement
+- **🧪 Task tests** — your implementation must make these pass
 - A focused `README.md` with key gotchas and run instructions
+
+---
+
+## 🎯 How the Tasks work
+
+Every module includes two extra files alongside the theory:
+
+```
+SomethingDemo.java       ← annotated reference code (read this first)
+SomethingTasks.java      ← method stubs with UnsupportedOperationException
+SomethingDemoTest.java   ← tests for the demo (already green)
+SomethingTasksTest.java  ← tests for YOUR implementation (start red → make green)
+```
+
+**The workflow:**
+1. Read `*Demo.java` to understand the concept
+2. Open `*Tasks.java` — each method has a Javadoc explaining what to implement
+3. Implement the method, remove the `UnsupportedOperationException`
+4. Run `mvn test -Dtest=*TasksTest` and watch tests go green ✅
 
 ---
 
 ## 📚 Modules
 
-| Module | Description | Java | Tags |
-|---|---|---|---|
-| `basics-variables-and-types` | Primitive types, type casting, literals, constants, variable scope, `var` type inference | 8–17+ | BASICS |
-| `basics-operators-and-expressions` | Arithmetic, logical, bitwise, ternary operators, operator precedence | 8 | BASICS |
-| `control-flow-statements` | if-else, switch (classic + expressions + pattern matching), loops, break/continue | 8–17+ | CONTROL-FLOW |
-| `strings-and-text-processing` | String manipulation, StringBuilder, text blocks, String pool, regex, formatting | 8–15+ | STRINGS |
-| `arrays-and-collections-basics` | Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns | 8 | COLLECTIONS |
-| `oop-inheritance-and-polymorphism` | Inheritance, overriding, super, polymorphism, abstract classes | 8 | OOP |
-| `oop-interfaces-and-abstraction` | Interfaces, default/static methods, multiple inheritance via interfaces | 8–9 | OOP |
-| `oop-encapsulation-patterns` | Access modifiers, immutability, records (Java 16+), data hiding | 8–16+ | OOP |
-| `enums-and-nested-classes` | Enums with fields/methods, inner/static nested/anonymous classes | 8 | OOP, ADVANCED |
-| `sealed-classes-pattern-matching` | Sealed classes/interfaces, permits, pattern matching (switch + instanceof) | 17–21+ | OOP, MODERN-JAVA |
-| `exception-handling` | try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources | 8 | EXCEPTIONS |
-| `generics-fundamentals` | Generic classes/methods, bounded types, wildcards (`?`, `extends`, `super`) | 8 | GENERICS |
-| `collections-framework-advanced` | Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators | 8 | COLLECTIONS |
-| `functional-interfaces` | `@FunctionalInterface`, lambdas, method references, Predicate/Function/Consumer/Supplier | 8 | FUNCTIONAL |
-| `streams-api-basics` | Stream creation, filter/map/sorted/collect/forEach/reduce | 8 | STREAMS |
-| `streams-api-advanced` | flatMap, groupingBy, partitioningBy, parallel streams, custom collectors | 8 | STREAMS |
-| `optional-and-null-handling` | Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains | 8 | FUNCTIONAL |
-| `date-time-api` | LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing | 8 | DATE-TIME |
-| `file-io-basics` | File/BufferedReader/Writer, try-with-resources, Path/Files API | 8 | I/O |
-| `file-io-nio` | NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes | 8 | I/O, NIO |
-| `serialization` | Serializable, Object streams, transient, serialVersionUID, Externalizable | 8 | I/O, SERIALIZATION |
-| `logging-basics` | SLF4J + Logback, configuration, best practices, structured logging | 8+ | LOGGING |
-| `http-client-api` | Modern `java.net.http.HttpClient` (sync/async), request/response handling | 11+ | NETWORKING, MODERN-JAVA |
-| `annotations` | Built-in, custom annotations, retention & target policies | 8 | ANNOTATIONS |
-| `reflection-api` | Class introspection, dynamic field/method access, annotation processing | 8 | REFLECTION |
-| `jvm-basics-memory-and-gc` | Stack vs Heap, object lifecycle, GC basics, strong/soft/weak/phantom references | 8+ | JVM, PERFORMANCE |
-| `multithreading-basics` | Thread/Runnable, lifecycle, synchronization, volatile, thread-safety | 8 | CONCURRENCY |
-| `multithreading-advanced` | ExecutorService, ThreadPool, Callable/Future, CountDownLatch, Semaphore | 8 | CONCURRENCY |
-| `concurrent-collections` | ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes | 8 | CONCURRENCY |
-| `virtual-threads-intro` | Project Loom / Virtual Threads basics, structured concurrency intro | 21+ | CONCURRENCY, MODERN-JAVA |
-| `design-patterns` | Singleton, Factory, Builder, Observer, Strategy, Decorator | 8 | DESIGN-PATTERNS |
-| `best-practices-and-solid` | SOLID principles, clean code, common code smells, refactoring | 8+ | BEST-PRACTICES |
-| `java-modules-jpms` | Java Platform Module System — `module-info.java`, requires/exports | 9+ | MODERN-JAVA |
+| Module                                                                         | Description | Java | Tags |
+|--------------------------------------------------------------------------------|---|---|---|
+| [basics-variables-and-types](basics-variables-and-types/README.md)             | Primitive types, type casting, literals, constants, variable scope, `var` type inference | 8–17+ | BASICS |
+| [basics-operators-and-expressions](basics-operators-and-expressions/README.md) | Arithmetic, logical, bitwise, ternary operators, operator precedence | 8 | BASICS |
+| [control-flow-statements](control-flow-statements/README.md)                   | if-else, switch (classic + expressions + pattern matching), loops, break/continue | **21+** ¹ | CONTROL-FLOW |
+| `strings-and-text-processing`                                                  | String manipulation, StringBuilder, text blocks, String pool, regex, formatting | 8–15+ | STRINGS |
+| `arrays-and-collections-basics`                                                | Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns | 8 | COLLECTIONS |
+| `oop-inheritance-and-polymorphism`                                             | Inheritance, overriding, super, polymorphism, abstract classes | 8 | OOP |
+| `oop-interfaces-and-abstraction`                                               | Interfaces, default/static methods, multiple inheritance via interfaces | 8–9 | OOP |
+| `oop-encapsulation-patterns`                                                   | Access modifiers, immutability, records (Java 16+), data hiding | 8–16+ | OOP |
+| `enums-and-nested-classes`                                                     | Enums with fields/methods, inner/static nested/anonymous classes | 8 | OOP, ADVANCED |
+| `sealed-classes-pattern-matching`                                              | Sealed classes/interfaces, permits, pattern matching (switch + instanceof) | **17–21+** | OOP, MODERN-JAVA |
+| `exception-handling`                                                           | try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources | 8 | EXCEPTIONS |
+| `generics-fundamentals`                                                        | Generic classes/methods, bounded types, wildcards (`?`, `extends`, `super`) | 8 | GENERICS |
+| `collections-framework-advanced`                                               | Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators | 8 | COLLECTIONS |
+| `functional-interfaces`                                                        | `@FunctionalInterface`, lambdas, method references, Predicate/Function/Consumer/Supplier | 8 | FUNCTIONAL |
+| `streams-api-basics`                                                           | Stream creation, filter/map/sorted/collect/forEach/reduce | 8 | STREAMS |
+| `streams-api-advanced`                                                         | flatMap, groupingBy, partitioningBy, parallel streams, custom collectors | 8 | STREAMS |
+| `optional-and-null-handling`                                                   | Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains | 8 | FUNCTIONAL |
+| `date-time-api`                                                                | LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing | 8 | DATE-TIME |
+| `file-io-basics`                                                               | File/BufferedReader/Writer, try-with-resources, Path/Files API | 8 | I/O |
+| `file-io-nio`                                                                  | NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes | 8 | I/O, NIO |
+| `serialization`                                                                | Serializable, Object streams, transient, serialVersionUID, Externalizable | 8 | I/O, SERIALIZATION |
+| `logging-basics`                                                               | SLF4J + Logback, configuration, best practices, structured logging | 8+ | LOGGING |
+| `http-client-api`                                                              | Modern `java.net.http.HttpClient` (sync/async), request/response handling | 11+ | NETWORKING, MODERN-JAVA |
+| `annotations`                                                                  | Built-in, custom annotations, retention & target policies | 8 | ANNOTATIONS |
+| `reflection-api`                                                               | Class introspection, dynamic field/method access, annotation processing | 8 | REFLECTION |
+| `jvm-basics-memory-and-gc`                                                     | Stack vs Heap, object lifecycle, GC basics, strong/soft/weak/phantom references | 8+ | JVM, PERFORMANCE |
+| `multithreading-basics`                                                        | Thread/Runnable, lifecycle, synchronization, volatile, thread-safety | 8 | CONCURRENCY |
+| `multithreading-advanced`                                                      | ExecutorService, ThreadPool, Callable/Future, CountDownLatch, Semaphore | 8 | CONCURRENCY |
+| `concurrent-collections`                                                       | ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes | 8 | CONCURRENCY |
+| `virtual-threads-intro`                                                        | Project Loom / Virtual Threads basics, structured concurrency intro | **21+** | CONCURRENCY, MODERN-JAVA |
+| `design-patterns`                                                              | Singleton, Factory, Builder, Observer, Strategy, Decorator | 8 | DESIGN-PATTERNS |
+| `best-practices-and-solid`                                                     | SOLID principles, clean code, common code smells, refactoring | 8+ | BEST-PRACTICES |
+| `java-modules-jpms`                                                            | Java Platform Module System — `module-info.java`, requires/exports | 9+ | MODERN-JAVA |
+
+> ¹ Modules marked **21+** override the parent Java 17 default in their own `pom.xml`.
 
 ---
 
@@ -74,7 +97,7 @@ Each module contains:
 
 ### Prerequisites
 
-- **Java 17+** (some modules demo Java 21+ features)
+- **Java 17+** (Java 21 for modules marked 21+)
 - **Maven 3.6+**
 - **JUnit 5** (managed via parent `pom.xml`)
 
@@ -91,8 +114,8 @@ mvn test
 cd basics-variables-and-types
 mvn test
 
-# Run a specific test class
-mvn test -Dtest=VariablesDemoTest
+# Run only the task tests for a module
+mvn test -Dtest=VariablesTasksTest
 ```
 
 ### Open in IntelliJ IDEA
@@ -125,6 +148,14 @@ Child modules declare only **what** they need — never a version.
         <!-- no version here -->
     </dependency>
 </dependencies>
+```
+
+To override Java version for a specific module, add to that module's `pom.xml`:
+
+```xml
+<properties>
+    <java.version>21</java.version>
+</properties>
 ```
 
 | Module category | Dependencies used |
@@ -186,7 +217,7 @@ Phase 9 — Advanced Topics
 | Java 15+ | Text blocks |
 | Java 16+ | Records |
 | Java 17 | Sealed classes, pattern matching previews |
-| Java 21+ | Virtual threads (Project Loom), structured concurrency |
+| Java 21+ | Virtual threads (Project Loom), switch pattern matching with guards |
 
 ---
 
