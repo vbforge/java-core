@@ -18,6 +18,7 @@
 
     <!-- ── Modules ── -->
     <modules>
+        <module>quick-interview-reference</module>
         <module>basics-variables-and-types</module>
         <module>basics-operators-and-expressions</module>
         <module>control-flow-statements</module>
