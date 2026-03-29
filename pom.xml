@@ -22,6 +22,7 @@
         <module>basics-variables-and-types</module>
         <module>basics-operators-and-expressions</module>
         <module>control-flow-statements</module>
+        <module>strings-and-text-processing</module>
         <!-- Future modules added here as they are created -->
     </modules>
 
