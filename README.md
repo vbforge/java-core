@@ -13,7 +13,7 @@
 
 ## 🎓 What's inside
 
-- **Fundamentals** — variables, operators, control flow, strings, collections basics
+- **Fundamentals** — variables, operators, BigDecimal, control flow, strings, collections basics
 - **Core OOP** — inheritance, interfaces, encapsulation, enums, sealed classes
 - **Functional & Streams** — lambdas, method references, Stream API, Optional
 - **Exceptions, Generics & Collections** — advanced collection patterns, wildcard types
@@ -57,41 +57,42 @@ SomethingTasksTest.java  ← tests for YOUR implementation (start red → make g
 
 ## 📚 Modules
 
-| Module | Description | Java | Tags |
-|---|---|---|---|
-| [`basics-variables-and-types`](./basics-variables-and-types/README.md) | Primitive types, type casting, literals, constants, variable scope, `var` type inference | 8–17+ | BASICS |
-| [`basics-operators-and-expressions`](./basics-operators-and-expressions/README.md) | Arithmetic, logical, bitwise, ternary operators, operator precedence | 8 | BASICS |
-| [`control-flow-statements`](./control-flow-statements/README.md) | if-else, switch (classic + expressions + pattern matching), loops, break/continue | **21+** ¹ | CONTROL-FLOW |
-| [`strings-and-text-processing`](./strings-and-text-processing/README.md) | String manipulation, StringBuilder, text blocks, String pool, regex, formatting | 8–15+ | STRINGS |
-| [`arrays-and-collections-basics`](./arrays-and-collections-basics/README.md) | Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns | 8 | COLLECTIONS |
-| [`oop-inheritance-and-polymorphism`](./oop-inheritance-and-polymorphism/README.md) | Inheritance, overriding, super, polymorphism, abstract classes | 8 | OOP |
-| [`oop-interfaces-and-abstraction`](./oop-interfaces-and-abstraction/README.md) | Interfaces, default/static methods, multiple inheritance via interfaces | 8–9 | OOP |
-| [`oop-encapsulation-patterns`](./oop-encapsulation-patterns/README.md) | Access modifiers, immutability, records (Java 16+), data hiding | 8–16+ | OOP |
-| [`enums-and-nested-classes`](./enums-and-nested-classes/README.md) | Enums with fields/methods, inner/static nested/anonymous classes | 8 | OOP, ADVANCED |
-| [`sealed-classes-pattern-matching`](./sealed-classes-pattern-matching/README.md) | Sealed classes/interfaces, permits, pattern matching (switch + instanceof) | **17–21+** | OOP, MODERN-JAVA |
-| [`exception-handling`](./exception-handling/README.md) | try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources | 8 | EXCEPTIONS |
-| [`generics-fundamentals`](./generics-fundamentals/README.md) | Generic classes/methods, bounded types, wildcards (`?`, `extends`, `super`) | 8 | GENERICS |
-| [`collections-framework-advanced`](./collections-framework-advanced/README.md) | Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators | 8 | COLLECTIONS |
-| [`functional-interfaces`](./functional-interfaces/README.md) | `@FunctionalInterface`, lambdas, method references, Predicate/Function/Consumer/Supplier | 8 | FUNCTIONAL |
-| [`streams-api-basics`](./streams-api-basics/README.md) | Stream creation, filter/map/sorted/collect/forEach/reduce | 8 | STREAMS |
-| [`streams-api-advanced`](./streams-api-advanced/README.md) | flatMap, groupingBy, partitioningBy, parallel streams, custom collectors | 8 | STREAMS |
-| [`optional-and-null-handling`](./optional-and-null-handling/README.md) | Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains | 8 | FUNCTIONAL |
-| [`date-time-api`](./date-time-api/README.md) | LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing | 8 | DATE-TIME |
-| [`file-io-basics`](./file-io-basics/README.md) | File/BufferedReader/Writer, try-with-resources, Path/Files API | 8 | I/O |
-| [`file-io-nio`](./file-io-nio/README.md) | NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes | 8 | I/O, NIO |
-| [`serialization`](./serialization/README.md) | Serializable, Object streams, transient, serialVersionUID, Externalizable | 8 | I/O, SERIALIZATION |
-| [`logging-basics`](./logging-basics/README.md) | SLF4J + Logback, configuration, best practices, structured logging | 8+ | LOGGING |
-| [`http-client-api`](./http-client-api/README.md) | Modern `java.net.http.HttpClient` (sync/async), request/response handling | 11+ | NETWORKING, MODERN-JAVA |
-| [`annotations`](./annotations/README.md) | Built-in, custom annotations, retention & target policies | 8 | ANNOTATIONS |
-| [`reflection-api`](./reflection-api/README.md) | Class introspection, dynamic field/method access, annotation processing | 8 | REFLECTION |
-| [`jvm-basics-memory-and-gc`](./jvm-basics-memory-and-gc/README.md) | Stack vs Heap, object lifecycle, GC basics, strong/soft/weak/phantom references | 8+ | JVM, PERFORMANCE |
-| [`multithreading-basics`](./multithreading-basics/README.md) | Thread/Runnable, lifecycle, synchronization, volatile, thread-safety | 8 | CONCURRENCY |
-| [`multithreading-advanced`](./multithreading-advanced/README.md) | ExecutorService, ThreadPool, Callable/Future, CountDownLatch, Semaphore | 8 | CONCURRENCY |
-| [`concurrent-collections`](./concurrent-collections/README.md) | ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes | 8 | CONCURRENCY |
-| [`virtual-threads-intro`](./virtual-threads-intro/README.md) | Project Loom / Virtual Threads basics, structured concurrency intro | **21+** | CONCURRENCY, MODERN-JAVA |
-| [`design-patterns`](./design-patterns/README.md) | Singleton, Factory, Builder, Observer, Strategy, Decorator | 8 | DESIGN-PATTERNS |
-| [`best-practices-and-solid`](./best-practices-and-solid/README.md) | SOLID principles, clean code, common code smells, refactoring | 8+ | BEST-PRACTICES |
-| [`java-modules-jpms`](./java-modules-jpms/README.md) | Java Platform Module System — `module-info.java`, requires/exports | 9+ | MODERN-JAVA |
+| Module                                                                             | Description                                                                              | Java       | Tags                     |
+|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|------------|--------------------------|
+| [`basics-variables-and-types`](./basics-variables-and-types/README.md)             | Primitive types, type casting, literals, constants, variable scope, `var` type inference | 8–17+      | BASICS                   |
+| [`basics-operators-and-expressions`](./basics-operators-and-expressions/README.md) | Arithmetic, logical, bitwise, ternary operators, operator precedence                     | 8          | BASICS                   |
+| [`bigdecimal-and-numeric-precision`](./bigdecimal-and-numeric-precision/README.md) | Floating-point, BigDecimal creation, scale, RoundingMode, compareTo vs equals                     | 8          | BASICS                   |
+| [`control-flow-statements`](./control-flow-statements/README.md)                   | if-else, switch (classic + expressions + pattern matching), loops, break/continue        | **21+** ¹  | CONTROL-FLOW             |
+| [`strings-and-text-processing`](./strings-and-text-processing/README.md)           | String manipulation, StringBuilder, text blocks, String pool, regex, formatting          | 8–15+      | STRINGS                  |
+| [`arrays-and-collections-basics`](./arrays-and-collections-basics/README.md)       | Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns                      | 8          | COLLECTIONS              |
+| [`oop-inheritance-and-polymorphism`](./oop-inheritance-and-polymorphism/README.md) | Inheritance, overriding, super, polymorphism, abstract classes                           | 8          | OOP                      |
+| [`oop-interfaces-and-abstraction`](./oop-interfaces-and-abstraction/README.md)     | Interfaces, default/static methods, multiple inheritance via interfaces                  | 8–9        | OOP                      |
+| [`oop-encapsulation-patterns`](./oop-encapsulation-patterns/README.md)             | Access modifiers, immutability, records (Java 16+), data hiding                          | 8–16+      | OOP                      |
+| [`enums-and-nested-classes`](./enums-and-nested-classes/README.md)                 | Enums with fields/methods, inner/static nested/anonymous classes                         | 8          | OOP, ADVANCED            |
+| [`sealed-classes-pattern-matching`](./sealed-classes-pattern-matching/README.md)   | Sealed classes/interfaces, permits, pattern matching (switch + instanceof)               | **17–21+** | OOP, MODERN-JAVA         |
+| [`exception-handling`](./exception-handling/README.md)                             | try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources           | 8          | EXCEPTIONS               |
+| [`generics-fundamentals`](./generics-fundamentals/README.md)                       | Generic classes/methods, bounded types, wildcards (`?`, `extends`, `super`)              | 8          | GENERICS                 |
+| [`collections-framework-advanced`](./collections-framework-advanced/README.md)     | Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators                         | 8          | COLLECTIONS              |
+| [`functional-interfaces`](./functional-interfaces/README.md)                       | `@FunctionalInterface`, lambdas, method references, Predicate/Function/Consumer/Supplier | 8          | FUNCTIONAL               |
+| [`streams-api-basics`](./streams-api-basics/README.md)                             | Stream creation, filter/map/sorted/collect/forEach/reduce                                | 8          | STREAMS                  |
+| [`streams-api-advanced`](./streams-api-advanced/README.md)                         | flatMap, groupingBy, partitioningBy, parallel streams, custom collectors                 | 8          | STREAMS                  |
+| [`optional-and-null-handling`](./optional-and-null-handling/README.md)             | Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains                      | 8          | FUNCTIONAL               |
+| [`date-time-api`](./date-time-api/README.md)                                       | LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing              | 8          | DATE-TIME                |
+| [`file-io-basics`](./file-io-basics/README.md)                                     | File/BufferedReader/Writer, try-with-resources, Path/Files API                           | 8          | I/O                      |
+| [`file-io-nio`](./file-io-nio/README.md)                                           | NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes                        | 8          | I/O, NIO                 |
+| [`serialization`](./serialization/README.md)                                       | Serializable, Object streams, transient, serialVersionUID, Externalizable                | 8          | I/O, SERIALIZATION       |
+| [`logging-basics`](./logging-basics/README.md)                                     | SLF4J + Logback, configuration, best practices, structured logging                       | 8+         | LOGGING                  |
+| [`http-client-api`](./http-client-api/README.md)                                   | Modern `java.net.http.HttpClient` (sync/async), request/response handling                | 11+        | NETWORKING, MODERN-JAVA  |
+| [`annotations`](./annotations/README.md)                                           | Built-in, custom annotations, retention & target policies                                | 8          | ANNOTATIONS              |
+| [`reflection-api`](./reflection-api/README.md)                                     | Class introspection, dynamic field/method access, annotation processing                  | 8          | REFLECTION               |
+| [`jvm-basics-memory-and-gc`](./jvm-basics-memory-and-gc/README.md)                 | Stack vs Heap, object lifecycle, GC basics, strong/soft/weak/phantom references          | 8+         | JVM, PERFORMANCE         |
+| [`multithreading-basics`](./multithreading-basics/README.md)                       | Thread/Runnable, lifecycle, synchronization, volatile, thread-safety                     | 8          | CONCURRENCY              |
+| [`multithreading-advanced`](./multithreading-advanced/README.md)                   | ExecutorService, ThreadPool, Callable/Future, CountDownLatch, Semaphore                  | 8          | CONCURRENCY              |
+| [`concurrent-collections`](./concurrent-collections/README.md)                     | ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes            | 8          | CONCURRENCY              |
+| [`virtual-threads-intro`](./virtual-threads-intro/README.md)                       | Project Loom / Virtual Threads basics, structured concurrency intro                      | **21+**    | CONCURRENCY, MODERN-JAVA |
+| [`design-patterns`](./design-patterns/README.md)                                   | Singleton, Factory, Builder, Observer, Strategy, Decorator                               | 8          | DESIGN-PATTERNS          |
+| [`best-practices-and-solid`](./best-practices-and-solid/README.md)                 | SOLID principles, clean code, common code smells, refactoring                            | 8+         | BEST-PRACTICES           |
+| [`java-modules-jpms`](./java-modules-jpms/README.md)                               | Java Platform Module System — `module-info.java`, requires/exports                       | 9+         | MODERN-JAVA              |
 
 > ¹ Modules marked **21+** override the parent Java 17 default in their own `pom.xml`.
 

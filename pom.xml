@@ -24,6 +24,7 @@
         <module>control-flow-statements</module>
         <module>strings-and-text-processing</module>
         <module>arrays-and-collections-basics</module>
+        <module>bigdecimal-and-numeric-precision</module>
         <!-- Future modules added here as they are created -->
     </modules>
 
