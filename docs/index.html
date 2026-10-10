@@ -359,6 +359,11 @@ section { padding: 80px 40px; position: relative; z-index: 1; }
 .tag-SERIALIZATION { background: rgba(245,166,35,0.12); color: #f5a623; border: 1px solid rgba(245,166,35,0.2); }
 .tag-NIO { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
 .tag-REFERENCE { background: rgba(245,166,35,0.15); color: #f5a623; border: 1px solid rgba(245,166,35,0.35); font-weight: 700; }
+/* New tags added to match README */
+.tag-BUILD { background: rgba(201,162,39,0.12); color: #c9a227; border: 1px solid rgba(201,162,39,0.25); }
+.tag-TESTING { background: rgba(107,203,119,0.12); color: #6bcb77; border: 1px solid rgba(107,203,119,0.25); }
+.tag-JSON { background: rgba(232,161,58,0.12); color: #e8a13a; border: 1px solid rgba(232,161,58,0.25); }
+.tag-TOOLS { background: rgba(127,184,232,0.12); color: #7fb8e8; border: 1px solid rgba(127,184,232,0.25); }
 
 .java-badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-family: var(--mono); font-size: 10px; background: rgba(91,141,238,0.1); color: var(--java); border: 1px solid rgba(91,141,238,0.2); white-space: nowrap; }
 
@@ -441,12 +446,12 @@ footer { padding: 40px; border-top: 1px solid var(--border); display: flex; alig
       <span class="line2">Java Core</span>
     </h1>
     <p class="hero-desc">
-      31 structured modules with practical code examples, tests, and hands-on tasks.
+      46 structured modules with practical code examples, tests, and hands-on tasks.
       From primitive types to virtual threads — everything in one place.
     </p>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-num">31<span>+</span></div>
+        <div class="stat-num">46<span>+</span></div>
         <div class="stat-label">Modules</div>
       </div>
       <div class="stat">
@@ -600,101 +605,142 @@ footer { padding: 40px; border-top: 1px solid var(--border); display: flex; alig
 <script>
 const GH_BASE = 'https://github.com/vbforge/java-core/blob/main';
 
-// ── PHASES DATA (learning modules only — excludes reference) ──
+// ── PHASES DATA — mirrors README "Recommended Learning Order" ──
 const PHASES = [
   { num: 1, name: "Basics", color: "#4caf7d", modules: [
     { id: "basics-variables-and-types",       label: "Variables & Types",              java: "8–17+" },
     { id: "basics-operators-and-expressions", label: "Operators",                      java: "8"     },
-    { id: "bigdecimal-and-numeric-precision", label: "BigDecimal",                      java: "8"     },
+    { id: "bigdecimal-and-numeric-precision", label: "BigDecimal",                     java: "8"     },
     { id: "control-flow-statements",          label: "Control Flow",                   java: "21+"   },
     { id: "strings-and-text-processing",      label: "Strings & Text",                 java: "8–15+" },
     { id: "arrays-and-collections-basics",    label: "Arrays & Collections Basics",    java: "8"     },
+    { id: "maven-recap",                      label: "Maven Recap",                    java: "8"     },
+    { id: "unit-testing-junit5-assertj",      label: "Unit Testing (JUnit 5)",         java: "8"     },
   ]},
-  { num: 2, name: "Core OOP", color: "#5b8dee", modules: [
-    { id: "oop-inheritance-and-polymorphism", label: "Inheritance & Polymorphism",     java: "8"     },
-    { id: "oop-interfaces-and-abstraction",   label: "Interfaces & Abstraction",       java: "8–9"   },
-    { id: "oop-encapsulation-patterns",       label: "Encapsulation Patterns",         java: "8–16+" },
-    { id: "enums-and-nested-classes",         label: "Enums & Nested Classes",         java: "8"     },
-    { id: "sealed-classes-pattern-matching",  label: "Sealed Classes & Pattern Match", java: "17–21+"},
+  { num: 2, name: "Core OOP & Design", color: "#5b8dee", modules: [
+    { id: "oop-inheritance-and-polymorphism",    label: "Inheritance & Polymorphism",     java: "8"     },
+    { id: "oop-interfaces-and-abstraction",      label: "Interfaces & Abstraction",       java: "8–9"   },
+    { id: "oop-encapsulation-patterns",          label: "Encapsulation Patterns",         java: "8–16+" },
+    { id: "equals-hashcode-and-object-contract", label: "equals/hashCode Contract",       java: "8–16+" },
+    { id: "enums-and-nested-classes",            label: "Enums & Nested Classes",         java: "8"     },
+    { id: "sealed-classes-pattern-matching",     label: "Sealed Classes & Pattern Match", java: "17–21+"},
+    { id: "best-practices-and-solid",            label: "SOLID & Best Practices",         java: "8+"    },
   ]},
-  { num: 3, name: "Functional & Streams", color: "#f5a623", modules: [
-    { id: "functional-interfaces",   label: "Functional Interfaces", java: "8" },
-    { id: "streams-api-basics",      label: "Streams Basics",        java: "8" },
-    { id: "streams-api-advanced",    label: "Streams Advanced",      java: "8" },
-    { id: "optional-and-null-handling", label: "Optional & Null",   java: "8" },
+  { num: 3, name: "Generics, Functional & Streams", color: "#f5a623", modules: [
+    { id: "generics-fundamentals",      label: "Generics Fundamentals", java: "8" },
+    { id: "functional-interfaces",      label: "Functional Interfaces", java: "8" },
+    { id: "streams-api-basics",         label: "Streams Basics",        java: "8" },
+    { id: "streams-api-advanced",       label: "Streams Advanced",      java: "8" },
+    { id: "optional-and-null-handling", label: "Optional & Null",       java: "8" },
   ]},
-  { num: 4, name: "Exceptions, Generics & Collections", color: "#9b7fe8", modules: [
-    { id: "exception-handling",            label: "Exception Handling",    java: "8" },
-    { id: "generics-fundamentals",         label: "Generics Fundamentals", java: "8" },
-    { id: "collections-framework-advanced",label: "Collections Advanced",  java: "8" },
+  { num: 4, name: "Exceptions & Collections", color: "#9b7fe8", modules: [
+    { id: "exception-handling",              label: "Exception Handling",    java: "8" },
+    { id: "collections-framework-advanced",  label: "Collections Advanced",  java: "8" },
+    { id: "collections-internals-and-big-o", label: "Collections Internals", java: "8" },
+    { id: "mockito-and-tdd",                 label: "Mockito & TDD",         java: "8" },
   ]},
-  { num: 5, name: "I/O, Date & Logging", color: "#e05a5a", modules: [
-    { id: "date-time-api",   label: "Date-Time API",    java: "8"  },
-    { id: "file-io-basics",  label: "File I/O Basics",  java: "8"  },
-    { id: "file-io-nio",     label: "File I/O NIO",     java: "8"  },
-    { id: "serialization",   label: "Serialization",    java: "8"  },
-    { id: "logging-basics",  label: "Logging Basics",   java: "8+" },
+  { num: 5, name: "I/O, Date-Time, Logging & HTTP", color: "#e05a5a", modules: [
+    { id: "date-time-api",       label: "Date-Time API",      java: "8"  },
+    { id: "file-io-basics",      label: "File I/O Basics",    java: "8"  },
+    { id: "file-io-nio",         label: "File I/O NIO",       java: "8"  },
+    { id: "serialization",       label: "Serialization",      java: "8"  },
+    { id: "json-jackson-basics", label: "JSON (Jackson)",     java: "8+" },
+    { id: "logging-basics",      label: "Logging Basics",     java: "8+" },
+    { id: "http-client-api",     label: "HTTP Client API",    java: "11+"},
   ]},
   { num: 6, name: "Concurrency", color: "#4ecdc4", modules: [
-    { id: "multithreading-basics",    label: "Multithreading Basics",    java: "8"   },
-    { id: "multithreading-advanced",  label: "Multithreading Advanced",  java: "8"   },
-    { id: "concurrent-collections",   label: "Concurrent Collections",   java: "8"   },
-    { id: "virtual-threads-intro",    label: "Virtual Threads (Loom)",   java: "21+" },
+    { id: "multithreading-basics",       label: "Multithreading Basics",   java: "8"   },
+    { id: "java-memory-model",           label: "Java Memory Model",       java: "8"   },
+    { id: "multithreading-advanced",     label: "Multithreading Advanced", java: "8"   },
+    { id: "locks-and-conditions",        label: "Locks & Conditions",      java: "8"   },
+    { id: "completablefuture-and-async", label: "CompletableFuture",       java: "8"   },
+    { id: "concurrent-collections",      label: "Concurrent Collections",  java: "8"   },
+    { id: "virtual-threads-intro",       label: "Virtual Threads (Loom)",  java: "21+" },
   ]},
   { num: 7, name: "JVM Internals", color: "#f5a623", modules: [
-    { id: "jvm-basics-memory-and-gc", label: "JVM Memory & GC", java: "8+" },
+    { id: "class-loading-and-jvm-architecture", label: "Class Loading & JVM Arch", java: "8+" },
+    { id: "jvm-basics-memory-and-gc",           label: "JVM Memory & GC",          java: "8+" },
+    { id: "jit-and-warmup",                     label: "JIT & Warm-up",            java: "8+" },
+    { id: "jvm-diagnostic-tools",               label: "JVM Diagnostic Tools",     java: "8+" },
   ]},
-  { num: 8, name: "Modern Java", color: "#5b8dee", modules: [
-    { id: "http-client-api",  label: "HTTP Client API",    java: "11+" },
-    { id: "java-modules-jpms",label: "Java Modules (JPMS)", java: "9+" },
+  { num: 8, name: "Optional Extras", color: "#5b8dee", modules: [
+    { id: "java-modules-jpms", label: "Java Modules (JPMS)", java: "9+" },
   ]},
   { num: 9, name: "Advanced Topics", color: "#9b7fe8", modules: [
-    { id: "annotations",           label: "Annotations",          java: "8"  },
-    { id: "reflection-api",        label: "Reflection API",       java: "8"  },
-    { id: "design-patterns",       label: "Design Patterns",      java: "8"  },
-    { id: "best-practices-and-solid", label: "SOLID & Best Practices", java: "8+" },
+    { id: "annotations",     label: "Annotations",     java: "8" },
+    { id: "reflection-api",  label: "Reflection API",  java: "8" },
+    { id: "design-patterns", label: "Design Patterns", java: "8" },
   ]},
 ];
 
-// ── MODULES DATA (all 31 learning modules + reference) ──
-// hasTasks: false for reference module and future modules without tasks yet
+// ── MODULES DATA — every module listed in README (phase order) ──
 const MODULES_DATA = [
-  { id: "basics-variables-and-types",        desc: "Primitive types, type casting, literals, constants, variable scope, var type inference",          tags: ["BASICS"],                       java: "8–17+",  hasTasks: true  },
-  { id: "basics-operators-and-expressions",  desc: "Arithmetic, logical, bitwise, ternary operators, operator precedence",                             tags: ["BASICS"],                       java: "8",      hasTasks: true  },
-  { id: "bigdecimal-and-numeric-precision",  desc: "Floating-point, BigDecimal creation, scale, RoundingMode, compareTo vs equals",                    tags: ["BASICS"],                       java: "8",      hasTasks: true  },
-  { id: "control-flow-statements",           desc: "if-else, switch (classic + expressions + pattern matching), loops, break/continue",                tags: ["CONTROL-FLOW"],                 java: "21+",    hasTasks: true  },
-  { id: "strings-and-text-processing",       desc: "String manipulation, StringBuilder, text blocks, String pool, regex, formatting",                  tags: ["STRINGS"],                      java: "8–15+",  hasTasks: true  },
-  { id: "arrays-and-collections-basics",     desc: "Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns",                             tags: ["COLLECTIONS"],                  java: "8",      hasTasks: true  },
-  { id: "oop-inheritance-and-polymorphism",  desc: "Inheritance, overriding, super, polymorphism, abstract classes",                                   tags: ["OOP"],                          java: "8",      hasTasks: true  },
-  { id: "oop-interfaces-and-abstraction",    desc: "Interfaces, default/static methods, multiple inheritance via interfaces",                          tags: ["OOP"],                          java: "8–9",    hasTasks: true  },
-  { id: "oop-encapsulation-patterns",        desc: "Access modifiers, immutability, records (Java 16+), data hiding",                                  tags: ["OOP"],                          java: "8–16+",  hasTasks: true  },
-  { id: "enums-and-nested-classes",          desc: "Enums with fields/methods, inner/static nested/anonymous classes",                                 tags: ["OOP", "ADVANCED"],              java: "8",      hasTasks: true  },
-  { id: "sealed-classes-pattern-matching",   desc: "Sealed classes/interfaces, permits, pattern matching (switch + instanceof)",                       tags: ["OOP", "MODERN-JAVA", "ADVANCED"], java: "17–21+", hasTasks: true },
-  { id: "exception-handling",                desc: "try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources",                   tags: ["EXCEPTIONS"],                   java: "8",      hasTasks: true  },
-  { id: "generics-fundamentals",             desc: "Generic classes/methods, bounded types, wildcards (?, extends, super)",                            tags: ["GENERICS"],                     java: "8",      hasTasks: true  },
-  { id: "collections-framework-advanced",    desc: "Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators, Collections util",               tags: ["COLLECTIONS", "ADVANCED"],      java: "8",      hasTasks: true  },
-  { id: "functional-interfaces",             desc: "@FunctionalInterface, lambdas, method references, Predicate/Function/Consumer/Supplier",           tags: ["FUNCTIONAL"],                   java: "8",      hasTasks: true  },
-  { id: "streams-api-basics",                desc: "Stream creation, filter/map/sorted/collect/forEach/reduce",                                        tags: ["STREAMS", "FUNCTIONAL"],        java: "8",      hasTasks: true  },
-  { id: "streams-api-advanced",              desc: "flatMap, groupingBy, partitioningBy, parallel streams, custom collectors",                         tags: ["STREAMS", "ADVANCED"],          java: "8",      hasTasks: true  },
-  { id: "optional-and-null-handling",        desc: "Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains",                              tags: ["FUNCTIONAL"],                   java: "8",      hasTasks: true  },
-  { id: "date-time-api",                     desc: "LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing",                      tags: ["DATE-TIME"],                    java: "8",      hasTasks: true  },
-  { id: "file-io-basics",                    desc: "File/BufferedReader/Writer, try-with-resources, Path/Files API",                                   tags: ["I/O"],                          java: "8",      hasTasks: true  },
-  { id: "file-io-nio",                       desc: "NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes",                                tags: ["I/O", "NIO"],                   java: "8",      hasTasks: true  },
-  { id: "serialization",                     desc: "Serializable, Object streams, transient, serialVersionUID, externalizable",                        tags: ["I/O", "SERIALIZATION"],         java: "8",      hasTasks: true  },
-  { id: "logging-basics",                    desc: "SLF4J + Logback, configuration, best practices, structured logging",                               tags: ["BEST-PRACTICES", "LOGGING"],    java: "8+",     hasTasks: true  },
-  { id: "http-client-api",                   desc: "Modern java.net.http.HttpClient (sync/async), request/response handling",                          tags: ["NETWORKING", "MODERN-JAVA"],    java: "11+",    hasTasks: true  },
-  { id: "annotations",                       desc: "Built-in, custom annotations, retention & target policies",                                        tags: ["ANNOTATIONS", "ADVANCED"],      java: "8",      hasTasks: true  },
-  { id: "reflection-api",                    desc: "Class introspection, dynamic field/method access, annotation processing",                          tags: ["REFLECTION", "ADVANCED"],       java: "8",      hasTasks: true  },
-  { id: "jvm-basics-memory-and-gc",          desc: "Stack vs Heap, object lifecycle, GC basics, reference types (strong/soft/weak/phantom)",           tags: ["JVM", "PERFORMANCE"],           java: "8+",     hasTasks: true  },
-  { id: "multithreading-basics",             desc: "Thread/Runnable, lifecycle, synchronization, volatile, thread-safety basics",                      tags: ["CONCURRENCY"],                  java: "8",      hasTasks: true  },
-  { id: "multithreading-advanced",           desc: "ExecutorService, ThreadPool, Callable/Future, CountDownLatch, CyclicBarrier, Semaphore",           tags: ["CONCURRENCY", "ADVANCED"],      java: "8",      hasTasks: true  },
-  { id: "concurrent-collections",            desc: "ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes",                    tags: ["CONCURRENCY", "COLLECTIONS"],   java: "8",      hasTasks: true  },
-  { id: "virtual-threads-intro",             desc: "Virtual threads / Project Loom basics (Java 21+), structured concurrency intro",                   tags: ["CONCURRENCY", "MODERN-JAVA"],   java: "21+",    hasTasks: true  },
-  { id: "design-patterns",                   desc: "Singleton, Factory, Builder, Observer, Strategy, Decorator + simple examples",                     tags: ["DESIGN-PATTERNS", "ADVANCED"],  java: "8",      hasTasks: true  },
-  { id: "best-practices-and-solid",          desc: "SOLID principles, clean code, common code smells, refactoring techniques",                         tags: ["BEST-PRACTICES", "ADVANCED"],   java: "8+",     hasTasks: true  },
-  { id: "java-modules-jpms",                 desc: "Java Platform Module System basics — module-info.java, requires/exports",                          tags: ["MODERN-JAVA", "ADVANCED"],      java: "9+",     hasTasks: true  },
+  // Phase 1 — Basics
+  { id: "basics-variables-and-types",       desc: "Primitive types, type casting, literals, constants, variable scope, var type inference",          tags: ["BASICS"],                       java: "8–17+",  hasTasks: true  },
+  { id: "basics-operators-and-expressions", desc: "Arithmetic, logical, bitwise, ternary operators, operator precedence",                             tags: ["BASICS"],                       java: "8",      hasTasks: true  },
+  { id: "bigdecimal-and-numeric-precision", desc: "Floating-point, BigDecimal creation, scale, RoundingMode, compareTo vs equals",                    tags: ["BASICS"],                       java: "8",      hasTasks: true  },
+  { id: "control-flow-statements",          desc: "if-else, switch (classic + expressions + pattern matching), loops, break/continue",                tags: ["CONTROL-FLOW"],                 java: "21+",    hasTasks: true  },
+  { id: "strings-and-text-processing",      desc: "String manipulation, StringBuilder, text blocks, String pool, regex, formatting",                  tags: ["STRINGS"],                      java: "8–15+",  hasTasks: true  },
+  { id: "arrays-and-collections-basics",    desc: "Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns",                              tags: ["COLLECTIONS"],                  java: "8",      hasTasks: true  },
+  { id: "maven-recap",                      desc: "pom.xml, coordinates, dependencies and scopes, lifecycle, plugins, wrapper",                        tags: ["BUILD"],                        java: "8",      hasTasks: true  },
+  { id: "unit-testing-junit5-assertj",      desc: "JUnit 5 lifecycle, parameterized tests, AssertJ, testing exceptions, Arrange-Act-Assert, TDD kata",tags: ["TESTING"],                      java: "8",      hasTasks: true  },
+
+  // Phase 2 — Core OOP & Design
+  { id: "oop-inheritance-and-polymorphism",    desc: "Inheritance, overriding, super, polymorphism, abstract classes",                                tags: ["OOP"],                          java: "8",      hasTasks: true  },
+  { id: "oop-interfaces-and-abstraction",      desc: "Interfaces, default/static methods, multiple inheritance via interfaces",                       tags: ["OOP"],                          java: "8–9",    hasTasks: true  },
+  { id: "oop-encapsulation-patterns",          desc: "Access modifiers, immutability, records (Java 16+), data hiding",                               tags: ["OOP"],                          java: "8–16+",  hasTasks: true  },
+  { id: "equals-hashcode-and-object-contract", desc: "equals/hashCode/toString/Comparable contracts, mutable keys in hash collections, records",      tags: ["OOP"],                          java: "8–16+",  hasTasks: true  },
+  { id: "enums-and-nested-classes",            desc: "Enums with fields/methods, inner/static nested/anonymous classes",                              tags: ["OOP", "ADVANCED"],              java: "8",      hasTasks: true  },
+  { id: "sealed-classes-pattern-matching",     desc: "Sealed classes/interfaces, permits, pattern matching (switch + instanceof)",                    tags: ["OOP", "MODERN-JAVA"],           java: "17–21+", hasTasks: true  },
+  { id: "best-practices-and-solid",            desc: "SOLID principles, clean code, common code smells, refactoring",                                 tags: ["BEST-PRACTICES"],               java: "8+",     hasTasks: true  },
+
+  // Phase 3 — Generics, Functional & Streams
+  { id: "generics-fundamentals",      desc: "Generic classes/methods, bounded types, wildcards (?, extends, super)",           tags: ["GENERICS"],              java: "8", hasTasks: true },
+  { id: "functional-interfaces",      desc: "@FunctionalInterface, lambdas, method references, Predicate/Function/Consumer/Supplier", tags: ["FUNCTIONAL"], java: "8", hasTasks: true },
+  { id: "streams-api-basics",         desc: "Stream creation, filter/map/sorted/collect/forEach/reduce",                      tags: ["STREAMS"],               java: "8", hasTasks: true },
+  { id: "streams-api-advanced",       desc: "flatMap, groupingBy, partitioningBy, parallel streams, custom collectors",       tags: ["STREAMS", "ADVANCED"],   java: "8", hasTasks: true },
+  { id: "optional-and-null-handling", desc: "Optional creation, orElse/orElseGet/orElseThrow, map/flatMap chains",            tags: ["FUNCTIONAL"],            java: "8", hasTasks: true },
+
+  // Phase 4 — Exceptions & Collections
+  { id: "exception-handling",              desc: "try-catch-finally, custom exceptions, checked vs unchecked, try-with-resources",             tags: ["EXCEPTIONS"],              java: "8", hasTasks: true },
+  { id: "collections-framework-advanced",  desc: "Queue, Deque, TreeSet/TreeMap, PriorityQueue, custom comparators",                           tags: ["COLLECTIONS"],             java: "8", hasTasks: true },
+  { id: "collections-internals-and-big-o", desc: "HashMap buckets/treeification/resize, ArrayList growth, TreeMap, PriorityQueue, Big-O",      tags: ["COLLECTIONS", "PERFORMANCE"], java: "8", hasTasks: true },
+  { id: "mockito-and-tdd",                 desc: "Test doubles, @Mock/when/verify, argument captors, red-green-refactor, when not to mock",    tags: ["TESTING"],                 java: "8", hasTasks: true },
+
+  // Phase 5 — I/O, Date-Time, Logging & HTTP
+  { id: "date-time-api",       desc: "LocalDate/Time/DateTime, ZonedDateTime, Period/Duration, formatting/parsing",     tags: ["DATE-TIME"],              java: "8",  hasTasks: true },
+  { id: "file-io-basics",      desc: "File/BufferedReader/Writer, try-with-resources, Path/Files API",                  tags: ["I/O"],                    java: "8",  hasTasks: true },
+  { id: "file-io-nio",         desc: "NIO.2 Files/Paths, DirectoryStream, WatchService, file attributes",               tags: ["I/O", "NIO"],             java: "8",  hasTasks: true },
+  { id: "serialization",       desc: "Serializable, Object streams, transient, serialVersionUID, Externalizable",       tags: ["I/O", "SERIALIZATION"],   java: "8",  hasTasks: true },
+  { id: "json-jackson-basics", desc: "ObjectMapper, records and POJOs, @JsonProperty/@JsonIgnore, dates, unknown fields",tags: ["I/O", "JSON"],            java: "8+", hasTasks: true },
+  { id: "logging-basics",      desc: "SLF4J + Logback, configuration, best practices, structured logging",              tags: ["LOGGING"],                java: "8+", hasTasks: true },
+  { id: "http-client-api",     desc: "Modern java.net.http.HttpClient (sync/async), request/response handling",         tags: ["NETWORKING", "MODERN-JAVA"], java: "11+", hasTasks: true },
+
+  // Phase 6 — Concurrency
+  { id: "multithreading-basics",       desc: "Thread/Runnable, lifecycle, synchronization, volatile, thread-safety",                          tags: ["CONCURRENCY"],              java: "8",   hasTasks: true },
+  { id: "java-memory-model",           desc: "Visibility vs atomicity, happens-before, reordering, safe publication, double-checked locking", tags: ["CONCURRENCY", "JVM"],       java: "8",   hasTasks: true },
+  { id: "multithreading-advanced",     desc: "ExecutorService, ThreadPool, Callable/Future, CountDownLatch, Semaphore",                      tags: ["CONCURRENCY"],              java: "8",   hasTasks: true },
+  { id: "locks-and-conditions",        desc: "ReentrantLock, ReadWriteLock, StampedLock, Condition, deadlock/livelock/starvation",           tags: ["CONCURRENCY"],              java: "8",   hasTasks: true },
+  { id: "completablefuture-and-async", desc: "supplyAsync/thenCompose/thenCombine, allOf/anyOf, error handling, executors, timeouts",        tags: ["CONCURRENCY"],              java: "8",   hasTasks: true },
+  { id: "concurrent-collections",      desc: "ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes",                tags: ["CONCURRENCY", "COLLECTIONS"], java: "8", hasTasks: true },
+  { id: "virtual-threads-intro",       desc: "Project Loom / Virtual Threads basics, structured concurrency intro",                          tags: ["CONCURRENCY", "MODERN-JAVA"], java: "21+", hasTasks: true },
+
+  // Phase 7 — JVM Internals
+  { id: "class-loading-and-jvm-architecture", desc: "Class loaders and delegation, load/link/initialise, memory areas, bytecode with javap", tags: ["JVM"],                    java: "8+", hasTasks: true },
+  { id: "jvm-basics-memory-and-gc",           desc: "Stack vs Heap, object lifecycle, GC basics, G1/ZGC trade-offs, GC logs, OOM causes",    tags: ["JVM", "PERFORMANCE"],     java: "8+", hasTasks: true },
+  { id: "jit-and-warmup",                     desc: "Interpreter → C1 → C2, inlining, escape analysis, warm-up, first look at JMH",          tags: ["JVM", "PERFORMANCE"],     java: "8+", hasTasks: true },
+  { id: "jvm-diagnostic-tools",               desc: "jps, jstack, jmap/heap dumps, jcmd, VisualVM, JFR, finding a leak",                     tags: ["JVM", "TOOLS"],           java: "8+", hasTasks: true },
+
+  // Phase 8 — Optional Extras
+  { id: "java-modules-jpms", desc: "Java Platform Module System — module-info.java, requires/exports", tags: ["MODERN-JAVA"], java: "9+", hasTasks: true },
+
+  // Phase 9 — Advanced Topics
+  { id: "annotations",     desc: "Built-in, custom annotations, retention & target policies",         tags: ["ANNOTATIONS", "ADVANCED"],      java: "8", hasTasks: true },
+  { id: "reflection-api",  desc: "Class introspection, dynamic field/method access, annotation processing", tags: ["REFLECTION", "ADVANCED"], java: "8", hasTasks: true },
+  { id: "design-patterns", desc: "Singleton, Factory, Builder, Observer, Strategy, Decorator",       tags: ["DESIGN-PATTERNS", "ADVANCED"], java: "8", hasTasks: true },
+
   // ── Reference (excluded from progress rings) ──
-  { id: "quick-interview-reference",         desc: "Curated docs and code snippets for Java interview preparation — all topics in one place",          tags: ["REFERENCE"],                    java: "—",      hasTasks: false, isReference: true },
+  { id: "quick-interview-reference", desc: "Curated docs and code snippets for Java interview preparation — all topics in one place", tags: ["REFERENCE"], java: "—", hasTasks: false, isReference: true },
 ];
 
 // Tasks-eligible modules only (hasTasks: true)

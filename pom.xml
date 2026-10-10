@@ -16,16 +16,81 @@
     <description>Comprehensive Java Core learning modules with practical examples and tests</description>
     <url>https://vbforge.github.io/java-core</url>
 
-    <!-- ── Modules ── -->
+    <!-- ── Modules ──
+         Only modules that physically exist in the repo are ACTIVE (uncommented).
+         All other modules are pre-declared but commented out — uncomment
+         one line when you create the corresponding directory + pom.xml.
+         Order mirrors the README "Recommended Learning Order".
+    -->
     <modules>
+
+        <!-- ── Reference (no tasks, no submodule build order constraints) ── -->
         <module>quick-interview-reference</module>
+
+        <!-- ── Phase 1 — Basics ── -->
         <module>basics-variables-and-types</module>
         <module>basics-operators-and-expressions</module>
+        <module>bigdecimal-and-numeric-precision</module>
         <module>control-flow-statements</module>
         <module>strings-and-text-processing</module>
         <module>arrays-and-collections-basics</module>
-        <module>bigdecimal-and-numeric-precision</module>
-        <!-- Future modules added here as they are created -->
+        <!-- <module>maven-recap</module> -->
+        <!-- <module>unit-testing-junit5-assertj</module> -->
+
+        <!-- ── Phase 2 — Core OOP & Design ── -->
+        <!-- <module>oop-inheritance-and-polymorphism</module> -->
+        <!-- <module>oop-interfaces-and-abstraction</module> -->
+        <!-- <module>oop-encapsulation-patterns</module> -->
+        <!-- <module>equals-hashcode-and-object-contract</module> -->
+        <!-- <module>enums-and-nested-classes</module> -->
+        <!-- <module>sealed-classes-pattern-matching</module> -->
+        <!-- <module>best-practices-and-solid</module> -->
+
+        <!-- ── Phase 3 — Generics, Functional & Streams ── -->
+        <!-- <module>generics-fundamentals</module> -->
+        <!-- <module>functional-interfaces</module> -->
+        <!-- <module>streams-api-basics</module> -->
+        <!-- <module>streams-api-advanced</module> -->
+        <!-- <module>optional-and-null-handling</module> -->
+
+        <!-- ── Phase 4 — Exceptions & Collections ── -->
+        <!-- <module>exception-handling</module> -->
+        <!-- <module>collections-framework-advanced</module> -->
+        <!-- <module>collections-internals-and-big-o</module> -->
+        <!-- <module>mockito-and-tdd</module> -->
+
+        <!-- ── Phase 5 — I/O, Date-Time, Logging & HTTP ── -->
+        <!-- <module>date-time-api</module> -->
+        <!-- <module>file-io-basics</module> -->
+        <!-- <module>file-io-nio</module> -->
+        <!-- <module>serialization</module> -->
+        <!-- <module>json-jackson-basics</module> -->
+        <!-- <module>logging-basics</module> -->
+        <!-- <module>http-client-api</module> -->
+
+        <!-- ── Phase 6 — Concurrency ── -->
+        <!-- <module>multithreading-basics</module> -->
+        <!-- <module>java-memory-model</module> -->
+        <!-- <module>multithreading-advanced</module> -->
+        <!-- <module>locks-and-conditions</module> -->
+        <!-- <module>completablefuture-and-async</module> -->
+        <!-- <module>concurrent-collections</module> -->
+        <!-- <module>virtual-threads-intro</module> -->
+
+        <!-- ── Phase 7 — JVM Internals ── -->
+        <!-- <module>class-loading-and-jvm-architecture</module> -->
+        <!-- <module>jvm-basics-memory-and-gc</module> -->
+        <!-- <module>jit-and-warmup</module> -->
+        <!-- <module>jvm-diagnostic-tools</module> -->
+
+        <!-- ── Phase 8 — Optional Extras ── -->
+        <!-- <module>java-modules-jpms</module> -->
+
+        <!-- ── Phase 9 — Advanced Topics ── -->
+        <!-- <module>annotations</module> -->
+        <!-- <module>reflection-api</module> -->
+        <!-- <module>design-patterns</module> -->
+
     </modules>
 
     <!-- ── Properties ── -->
