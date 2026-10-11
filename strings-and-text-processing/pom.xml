@@ -14,6 +14,7 @@
     <artifactId>strings-and-text-processing</artifactId>
     <packaging>jar</packaging>
     <name>strings-and-text-processing</name>
+    <description>String manipulation, StringBuilder, text blocks, String pool, regex, formatting</description>
 
     <!-- Java 15+ for text blocks (preview in 13/14, standard in 15) -->
     <properties>

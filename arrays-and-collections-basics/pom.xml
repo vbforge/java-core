@@ -14,6 +14,7 @@
     <artifactId>arrays-and-collections-basics</artifactId>
     <packaging>jar</packaging>
     <name>arrays-and-collections-basics</name>
+    <description>Arrays, ArrayList, LinkedList, HashSet, HashMap, iteration patterns</description>
 
     <!-- Java 8 — no modern features required for this module -->
     <properties>
