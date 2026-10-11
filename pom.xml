@@ -34,7 +34,7 @@
         <module>control-flow-statements</module>
         <module>strings-and-text-processing</module>
         <module>arrays-and-collections-basics</module>
-        <!-- <module>maven-recap</module> -->
+        <module>maven-recap</module>
         <!-- <module>unit-testing-junit5-assertj</module> -->
 
         <!-- ── Phase 2 — Core OOP & Design ── -->
