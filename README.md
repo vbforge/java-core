@@ -2,9 +2,11 @@
 
 🎯 **Comprehensive Java Core learning modules with practical examples, tests, and hands-on tasks**
 
+[![Build](https://github.com/vbforge/java-core/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/vbforge/java-core/actions/workflows/build.yml)
 [![Java](https://img.shields.io/badge/Java-17%2B-orange?style=flat-square&logo=openjdk)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.6%2B-blue?style=flat-square&logo=apachemaven)](https://maven.apache.org/)
 [![JUnit](https://img.shields.io/badge/JUnit-5-green?style=flat-square&logo=junit5)](https://junit.org/junit5/)
+[![AssertJ](https://img.shields.io/badge/AssertJ-3.25-1abc9c?style=flat-square)](https://assertj.github.io/doc/)
 [![License](https://img.shields.io/badge/License-unlicensed-lightgrey?style=flat-square)]()
 
 🌐 **[Interactive Roadmap & Progress Tracker →](https://vbforge.github.io/java-core)**

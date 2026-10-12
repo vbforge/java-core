@@ -38,7 +38,7 @@
         <module>unit-testing-junit5-assertj</module>
 
         <!-- ── Phase 2 — Core OOP & Design ── -->
-        <!-- <module>oop-inheritance-and-polymorphism</module> -->
+        <module>oop-inheritance-and-polymorphism</module>
         <!-- <module>oop-interfaces-and-abstraction</module> -->
         <!-- <module>oop-encapsulation-patterns</module> -->
         <!-- <module>equals-hashcode-and-object-contract</module> -->

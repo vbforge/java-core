@@ -1,9 +1,6 @@
 package com.vbforge.unit_testing_junit5_assertj;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,6 +43,7 @@ class TddKataTasksTest {
 
     // ── Step 1 — the only active test you get for free ────────────────────────
 
+    @Disabled("Remove @Disabled when you implement")
     @Test
     @DisplayName("Step 1 — fizzbuzz(1) == \"1\"")
     void step1_returnsTheNumber() {
