@@ -43,7 +43,7 @@
         <module>oop-encapsulation-patterns</module>
          <module>equals-hashcode-and-object-contract</module>
         <module>enums-and-nested-classes</module>
-        <!-- <module>sealed-classes-pattern-matching</module> -->
+        <module>sealed-classes-pattern-matching</module>
         <!-- <module>best-practices-and-solid</module> -->
 
         <!-- ── Phase 3 — Generics, Functional & Streams ── -->
