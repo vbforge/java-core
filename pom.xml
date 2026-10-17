@@ -47,7 +47,7 @@
          <module>best-practices-and-solid</module>
 
         <!-- ── Phase 3 — Generics, Functional & Streams ── -->
-        <!-- <module>generics-fundamentals</module> -->
+         <module>generics-fundamentals</module>
         <!-- <module>functional-interfaces</module> -->
         <!-- <module>streams-api-basics</module> -->
         <!-- <module>streams-api-advanced</module> -->
