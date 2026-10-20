@@ -51,7 +51,7 @@
          <module>functional-interfaces</module>
          <module>streams-api-basics</module>
          <module>streams-api-advanced</module>
-        <!-- <module>optional-and-null-handling</module> -->
+        <module>optional-and-null-handling</module>
 
         <!-- ── Phase 4 — Exceptions & Collections ── -->
         <!-- <module>exception-handling</module> -->
