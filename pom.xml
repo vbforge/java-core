@@ -55,7 +55,7 @@
 
         <!-- ── Phase 4 — Exceptions & Collections ── -->
          <module>exception-handling</module>
-        <!-- <module>collections-framework-advanced</module> -->
+        <module>collections-framework-advanced</module>
         <!-- <module>collections-internals-and-big-o</module> -->
         <!-- <module>mockito-and-tdd</module> -->
 
