@@ -40,4 +40,4 @@ desktop.ini
 *.log
 logs/
 
-helpers/
+_helpers_/
