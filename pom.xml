@@ -65,7 +65,7 @@
          <module>file-io-nio</module>
         <module>serialization</module>
          <module>json-jackson-basics</module>
-        <!-- <module>logging-basics</module> -->
+         <module>logging-basics</module>
          <module>http-client-api</module>
 
         <!-- ── Phase 6 — Concurrency ── -->

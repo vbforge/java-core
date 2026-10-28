@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    logback.xml — the default configuration for this module.
+
+    Logback looks for configuration on the classpath in this order:
+      1. logback-test.xml   (wins if present — handy for test-only overrides)
+      2. logback.xml        (this file)
+      3. built-in default   (console, DEBUG, no pattern control)
+
+    The three building blocks:
+      <appender>  WHERE events go        (console, file, ...)
+      <encoder>   HOW an event is written (pattern, JSON, ...)
+      <logger>/<root>  WHICH events pass  (level + attached appenders)
+-->
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- %kvp prints key-value pairs added through the SLF4J 2.x fluent API -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%kvp%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+        Example of a production-style rolling file appender (NOT active here,
+        so that running the tests never touches the file system):
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/app.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>logs/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <maxFileSize>10MB</maxFileSize>
+                <maxHistory>14</maxHistory>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d %-5level [%thread] %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+    -->
+
+    <!-- Our demo code may be chatty: DEBUG for this module's package -->
+    <logger name="com.vbforge.logging_basics" level="DEBUG"/>
+
+    <!-- Everything else (libraries!) stays at INFO -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
