@@ -153,7 +153,7 @@ mvn test -Dtest='*TasksTest'
 | [`completablefuture-and-async`](./completablefuture-and-async/README.md)                 | supplyAsync/thenCompose/thenCombine, allOf/anyOf, error handling, executors, timeouts                                    | 8          | CONCURRENCY              |
 | [`concurrent-collections`](./concurrent-collections/README.md)                           | ConcurrentHashMap, CopyOnWriteArrayList, BlockingQueue family, atomic classes                                            | 8          | CONCURRENCY              |
 | [`virtual-threads-intro`](./virtual-threads-intro/README.md)                             | Project Loom / Virtual Threads basics, structured concurrency intro                                                      | **21+**    | CONCURRENCY, MODERN-JAVA |
-| [`design-patterns`](./design-patterns/README.md)                                         | Singleton, Factory, Builder, Observer, Strategy, Decorator                                                               | 8          | DESIGN-PATTERNS          |
+| [`design-patterns`](./design-patterns/README.md)                                         | Singleton, Factory, Builder, Observer, Strategy, Decorator, Proxy                                                               | 8          | DESIGN-PATTERNS          |
 | [`java-modules-jpms`](./java-modules-jpms/README.md)                                     | Java Platform Module System — `module-info.java`, requires/exports                                                       | 9+         | MODERN-JAVA              |
 
 > ¹ Modules marked **21+** override the parent Java 17 default in their own `pom.xml`.
