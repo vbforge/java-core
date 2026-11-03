@@ -84,7 +84,7 @@
         <!-- <module>jvm-diagnostic-tools</module> -->
 
         <!-- ── Phase 8 — Optional Extras ── -->
-        <!-- <module>java-modules-jpms</module> -->
+         <module>java-modules-jpms</module>
 
         <!-- ── Phase 9 — Advanced Topics ── -->
         <!-- <module>annotations</module> -->
