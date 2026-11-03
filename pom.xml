@@ -73,7 +73,7 @@
          <module>java-memory-model</module>
          <module>multithreading-advanced</module>
          <module>locks-and-conditions</module>
-        <!-- <module>completablefuture-and-async</module> -->
+         <module>completablefuture-and-async</module>
         <!-- <module>concurrent-collections</module> -->
          <module>virtual-threads-intro</module>
 
