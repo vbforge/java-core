@@ -69,10 +69,10 @@
          <module>http-client-api</module>
 
         <!-- ── Phase 6 — Concurrency ── -->
-        <!-- <module>multithreading-basics</module> -->
-        <!-- <module>java-memory-model</module> -->
-        <!-- <module>multithreading-advanced</module> -->
-        <!-- <module>locks-and-conditions</module> -->
+         <module>multithreading-basics</module>
+         <module>java-memory-model</module>
+         <module>multithreading-advanced</module>
+         <module>locks-and-conditions</module>
         <!-- <module>completablefuture-and-async</module> -->
         <!-- <module>concurrent-collections</module> -->
         <!-- <module>virtual-threads-intro</module> -->
