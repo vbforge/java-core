@@ -1,6 +1,6 @@
 # basics-variables-and-types
 
-> **Phase 1 — Basics** | Java 8–17+ | Package: `com.vbforge.basics.variables`
+> **Phase 1 — Basics** | Java 8–17+ | Package: `com.vbforge.basics_variables_and_types`
 
 ## What's covered
 
@@ -19,10 +19,10 @@
 
 ```
 src/
-├── main/java/com/vbforge/basics/variables/
+├── main/java/com/vbforge/basics_variables_and_types/
 │   ├── VariablesDemo.java        ← theory + annotated examples
 │   └── VariablesTasks.java       ← 🎯 your tasks — implement these methods
-└── test/java/com/vbforge/basics/variables/
+└── test/java/com/vbforge/basics_variables_and_types/
     ├── VariablesDemoTest.java     ← tests for the demo
     └── VariablesTasksTest.java    ← 🧪 tests for your tasks — all must pass
 ```
@@ -76,5 +76,5 @@ mvn test -Dtest=VariablesDemoTest
 mvn test -Dtest=VariablesTasksTest
 
 # Run main demo
-mvn exec:java -Dexec.mainClass="com.vbforge.basics.variables.VariablesDemo"
+mvn exec:java -Dexec.mainClass="com.vbforge.basics_variables_and_types.VariablesDemo"
 ```

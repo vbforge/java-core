@@ -1,6 +1,6 @@
 # basics-operators-and-expressions
 
-> **Phase 1 — Basics** | Java 8 | Package: `com.vbforge.basics.operators`
+> **Phase 1 — Basics** | Java 8 | Package: `com.vbforge.basics_operators_and_expressions`
 
 ## What's covered
 
@@ -19,10 +19,10 @@
 
 ```
 src/
-├── main/java/com/vbforge/basics/operators/
+├── main/java/com/vbforge/basics_operators_and_expressions/
 │   ├── OperatorsDemo.java        ← theory + annotated examples
 │   └── OperatorsTasks.java       ← 🎯 your tasks — implement these methods
-└── test/java/com/vbforge/basics/operators/
+└── test/java/com/vbforge/basics_operators_and_expressions/
     ├── OperatorsDemoTest.java     ← tests for the demo
     └── OperatorsTasksTest.java    ← 🧪 tests for your tasks — all must pass
 ```
@@ -84,5 +84,5 @@ mvn test -Dtest=OperatorsDemoTest
 mvn test -Dtest=OperatorsTasksTest
 
 # Run main demo
-mvn exec:java -Dexec.mainClass="com.vbforge.basics.operators.OperatorsDemo"
+mvn exec:java -Dexec.mainClass="com.vbforge.basics_operators_and_expressions.OperatorsDemo"
 ```

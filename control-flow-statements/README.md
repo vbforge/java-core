@@ -1,6 +1,6 @@
 # control-flow-statements
 
-> **Phase 1 — Basics** | Java 21+ | Package: `com.vbforge.basics.controlflow`
+> **Phase 1 — Basics** | Java 21+ | Package: `com.vbforge.control_flow_statements`
 
 ## What's covered
 
@@ -25,10 +25,10 @@
 
 ```
 src/
-├── main/java/com/vbforge/basics/controlflow/
+├── main/java/com/vbforge/control_flow_statements/
 │   ├── ControlFlowDemo.java        ← theory + annotated examples
 │   └── ControlFlowTasks.java       ← 🎯 your tasks — implement these methods
-└── test/java/com/vbforge/basics/controlflow/
+└── test/java/com/vbforge/control_flow_statements/
     ├── ControlFlowDemoTest.java     ← tests for the demo
     └── ControlFlowTasksTest.java    ← 🧪 tests for your tasks — all must pass
 ```
@@ -104,5 +104,5 @@ mvn test -Dtest=ControlFlowDemoTest
 mvn test -Dtest=ControlFlowTasksTest
 
 # Run main demo
-mvn exec:java -Dexec.mainClass="com.vbforge.basics.controlflow.ControlFlowDemo"
+mvn exec:java -Dexec.mainClass="com.vbforge.control_flow_statements.ControlFlowDemo"
 ```
