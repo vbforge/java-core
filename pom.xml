@@ -74,7 +74,7 @@
          <module>multithreading-advanced</module>
          <module>locks-and-conditions</module>
          <module>completablefuture-and-async</module>
-        <!-- <module>concurrent-collections</module> -->
+         <module>concurrent-collections</module>
          <module>virtual-threads-intro</module>
 
         <!-- ── Phase 7 — JVM Internals ── -->
