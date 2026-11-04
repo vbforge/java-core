@@ -87,7 +87,7 @@
          <module>java-modules-jpms</module>
 
         <!-- ── Phase 9 — Advanced Topics ── -->
-        <!-- <module>annotations</module> -->
+         <module>annotations</module>
          <module>reflection-api</module>
          <module>design-patterns</module>
 
