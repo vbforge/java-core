@@ -81,7 +81,7 @@
          <module>class-loading-and-jvm-architecture</module>
          <module>jvm-basics-memory-and-gc</module>
          <module>jit-and-warmup</module>
-        <!-- <module>jvm-diagnostic-tools</module> -->
+         <module>jvm-diagnostic-tools</module>
 
         <!-- ── Phase 8 — Optional Extras ── -->
          <module>java-modules-jpms</module>
