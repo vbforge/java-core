@@ -1,4 +1,4 @@
-package com.vbforge;
+package com.vbforge.strings_and_text_processing;
 
 import java.util.List;
 
