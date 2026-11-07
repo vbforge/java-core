@@ -15,6 +15,12 @@
     <packaging>jar</packaging>
     <name>concurrent-collections</name>
 
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <!-- JUnit + AssertJ always. Add module-specific deps only if used. -->
         <dependency>

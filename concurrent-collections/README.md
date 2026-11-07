@@ -1,6 +1,6 @@
 # concurrent-collections
 
-> **Phase 6 — Concurrency** | Java 8 | Package: `com.vbforge.concurrent_collections`
+> **Phase 6 — Concurrency** | Java 21 + | Package: `com.vbforge.concurrent_collections`
 
 Thread-safe collections and atomic variables from `java.util.concurrent`: what each one guarantees, what it does **not**, and why a thread-safe collection alone does not make your program thread-safe.
 
