@@ -1,0 +1,1 @@
+Hello, file-io-basics!\nSecond line for sample.\nThird line to make word count interesting.

@@ -177,7 +177,7 @@ public class TryWithResourcesDemo {
     // ── 4. Wrapping constructors ──────────────────────────────────────────────
 
     /**
-     * {@code new BufferedReader(new FileReader(file))} is two objects. If the <em>outer</em>
+     * {@code new BufferedReader(new FileReaderDemo(file))} is two objects. If the <em>outer</em>
      * constructor throws, nobody holds a reference to the inner one — it is never closed.
      * Declaring each object as its own resource avoids the problem.
      *

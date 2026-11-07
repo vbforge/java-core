@@ -128,7 +128,7 @@ public class PathFilesDemo {
      *
      * <p>Gotchas:
      * <ul>
-     *   <li>{@code readAllLines} and {@code newBufferedReader} default to UTF-8 (unlike {@code FileReader}) —
+     *   <li>{@code readAllLines} and {@code newBufferedReader} default to UTF-8 (unlike {@code FileReaderDemo}) —
      *       still pass the charset to make it obvious.</li>
      *   <li>{@code readString}/{@code writeString} are Java 11+; on Java 8 go through bytes
      *       or {@code write(path, lines, charset)}.</li>

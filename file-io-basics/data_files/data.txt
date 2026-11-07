@@ -1,0 +1,1 @@
+line one from data.txt\nline two\nline three\n

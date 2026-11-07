@@ -1,0 +1,3 @@
+First line for BufferedReader.
+Second line, because readLine() loops until null.
+Third line.

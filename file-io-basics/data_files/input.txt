@@ -1,0 +1,3 @@
+This is the source content.
+ByteStreamExample, CharacterStreamExample, and BufferedStreamExample
+all copy this file to output.txt using different stream types.
