@@ -17,11 +17,14 @@ public class SharedMapperDemo {
     public static void main(String[] args) throws Exception {
         List<Future<String>> results = new ArrayList<>();
 
-        try (ExecutorService pool = Executors.newFixedThreadPool(4)) {
+        ExecutorService pool = Executors.newFixedThreadPool(4);
+        try {
             for (int i = 0; i < 100; i++) {
                 final int n = i;
                 results.add(pool.submit(() -> MAPPER.writeValueAsString(Map.of("n", n))));
             }
+        } finally {
+            pool.shutdown();
         }
 
         boolean allCorrect = true;
